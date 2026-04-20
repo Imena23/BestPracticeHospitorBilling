@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">MediPay</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="current_location">Current Location</string>
+    <string name="current_bill_total">Current Bill Total</string>
+    <string name="pending_payment">Pending Payment</string>
+    <string name="payment_due">Payment due by</string>
+    <string name="view_bill_details">View Bill Details</string>
+    <string name="quick_actions">Quick Actions</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_bills">Bills</string>
+    <string name="nav_payments">Payments</string>
+    <string name="nav_profile">Profile</string>
+    <string name="view_bills">View Bills</string>
+    <string name="payment_history">Payment History</string>
+    <string name="bill_breakdown">Bill Breakdown</string>
+    <string name="total_amount">Total Amount</string>
+    <string name="paid">Paid</string>
+    <string name="unpaid">Unpaid</string>
+    <string name="show_qr">Show QR Code</string>
+    <string name="digital_receipt">Digital Receipt</string>
+    <string name="logout">Logout</string>
+    <string name="patient_id">Patient ID</string>
+    <string name="ward">Ward</string>
+    <string name="doctor">Doctor</string>
+    <string name="admission_date">Admission Date</string>
+
+    <string-array name="insurance_providers">
+        <item>No Insurance (Private)</item>
+        <item>MMI (Military Medical Insurance)</item>
+        <item>RSSB</item>
+        <item>EDEN CARE</item>
+    </string-array>
+</resources>
