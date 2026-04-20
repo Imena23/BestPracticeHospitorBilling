@@ -1,0 +1,274 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="B_Jrg8PYKl5JUpc0BUAE">
+    <mxGraphModel dx="1300" dy="802" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Patient_header" parent="1" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" value="Patient" vertex="1">
+          <mxGeometry height="290" width="360" x="560" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Patient_f1" parent="Patient_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ _id : String" vertex="1">
+          <mxGeometry height="26" width="360" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Patient_f2" parent="Patient_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ resourceType : String" vertex="1">
+          <mxGeometry height="26" width="360" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="Patient_f3" parent="Patient_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ fhirId : String" vertex="1">
+          <mxGeometry height="26" width="360" y="82" as="geometry" />
+        </mxCell>
+        <mxCell id="Patient_f4" parent="Patient_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ active : Boolean" vertex="1">
+          <mxGeometry height="26" width="360" y="108" as="geometry" />
+        </mxCell>
+        <mxCell id="Patient_f5" parent="Patient_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ identifier : Array" vertex="1">
+          <mxGeometry height="26" width="360" y="134" as="geometry" />
+        </mxCell>
+        <mxCell id="Patient_f6" parent="Patient_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ name : Array" vertex="1">
+          <mxGeometry height="26" width="360" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="Patient_f7" parent="Patient_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ telecom : Array" vertex="1">
+          <mxGeometry height="26" width="360" y="186" as="geometry" />
+        </mxCell>
+        <mxCell id="Patient_f8" parent="Patient_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ gender : String" vertex="1">
+          <mxGeometry height="26" width="360" y="212" as="geometry" />
+        </mxCell>
+        <mxCell id="Patient_f9" parent="Patient_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ birthDate : Date" vertex="1">
+          <mxGeometry height="26" width="360" y="238" as="geometry" />
+        </mxCell>
+        <mxCell id="Patient_f10" parent="Patient_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ address : Array" vertex="1">
+          <mxGeometry height="26" width="360" y="264" as="geometry" />
+        </mxCell>
+        <mxCell id="Patient_header2" parent="1" style="swimlane;startSize=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="" vertex="1">
+          <mxGeometry height="78" width="360" x="560" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="Patient_f11" parent="Patient_header2" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ insuranceType : String" vertex="1">
+          <mxGeometry height="26" width="360" as="geometry" />
+        </mxCell>
+        <mxCell id="Patient_f12" parent="Patient_header2" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ encounters : Array" vertex="1">
+          <mxGeometry height="26" width="360" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Patient_f13" parent="Patient_header2" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ createdAt / updatedAt : Date" vertex="1">
+          <mxGeometry height="26" width="360" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="User_header" parent="1" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" value="User" vertex="1">
+          <mxGeometry height="264" width="320" x="60" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="User_f1" parent="User_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ _id : String" vertex="1">
+          <mxGeometry height="26" width="320" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="User_f2" parent="User_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ fullName : String" vertex="1">
+          <mxGeometry height="26" width="320" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="User_f3" parent="User_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ email : String" vertex="1">
+          <mxGeometry height="26" width="320" y="82" as="geometry" />
+        </mxCell>
+        <mxCell id="User_f4" parent="User_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ phone : String" vertex="1">
+          <mxGeometry height="26" width="320" y="108" as="geometry" />
+        </mxCell>
+        <mxCell id="User_f5" parent="User_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ passwordHash : String" vertex="1">
+          <mxGeometry height="26" width="320" y="134" as="geometry" />
+        </mxCell>
+        <mxCell id="User_f6" parent="User_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;fontStyle=2;" value="+ patientId : String (FK)" vertex="1">
+          <mxGeometry height="26" width="320" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="User_f7" parent="User_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ notifications : Array" vertex="1">
+          <mxGeometry height="26" width="320" y="186" as="geometry" />
+        </mxCell>
+        <mxCell id="User_f8" parent="User_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ createdAt / updatedAt : Date" vertex="1">
+          <mxGeometry height="26" width="320" y="212" as="geometry" />
+        </mxCell>
+        <mxCell id="Bill_header" parent="1" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#ffe6cc;strokeColor=#d6b656;fontSize=13;" value="Bill" vertex="1">
+          <mxGeometry height="500" width="360" x="1020" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Bill_f1" parent="Bill_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ _id : String" vertex="1">
+          <mxGeometry height="26" width="360" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Bill_f2" parent="Bill_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ resourceType : String" vertex="1">
+          <mxGeometry height="26" width="360" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="Bill_f3" parent="Bill_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ fhirId : String" vertex="1">
+          <mxGeometry height="26" width="360" y="82" as="geometry" />
+        </mxCell>
+        <mxCell id="Bill_f4" parent="Bill_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ status : String" vertex="1">
+          <mxGeometry height="26" width="360" y="108" as="geometry" />
+        </mxCell>
+        <mxCell id="Bill_f5" parent="Bill_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ identifier : Array" vertex="1">
+          <mxGeometry height="26" width="360" y="134" as="geometry" />
+        </mxCell>
+        <mxCell id="Bill_f6" parent="Bill_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ type : Object" vertex="1">
+          <mxGeometry height="26" width="360" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="Bill_f7" parent="Bill_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ subject : Object" vertex="1">
+          <mxGeometry height="26" width="360" y="186" as="geometry" />
+        </mxCell>
+        <mxCell id="Bill_f8" parent="Bill_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ recipient : Object" vertex="1">
+          <mxGeometry height="26" width="360" y="212" as="geometry" />
+        </mxCell>
+        <mxCell id="Bill_f9" parent="Bill_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ date : Date" vertex="1">
+          <mxGeometry height="26" width="360" y="238" as="geometry" />
+        </mxCell>
+        <mxCell id="Bill_f10" parent="Bill_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ lineItem : Array" vertex="1">
+          <mxGeometry height="26" width="360" y="264" as="geometry" />
+        </mxCell>
+        <mxCell id="Bill_f11" parent="Bill_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ totalNet : Object" vertex="1">
+          <mxGeometry height="26" width="360" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="Bill_f12" parent="Bill_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ totalGross : Object" vertex="1">
+          <mxGeometry height="26" width="360" y="316" as="geometry" />
+        </mxCell>
+        <mxCell id="Bill_f13" parent="Bill_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ note : Array" vertex="1">
+          <mxGeometry height="26" width="360" y="342" as="geometry" />
+        </mxCell>
+        <mxCell id="Bill_f14" parent="Bill_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;fontStyle=2;" value="+ patientId : String (FK)" vertex="1">
+          <mxGeometry height="26" width="360" y="368" as="geometry" />
+        </mxCell>
+        <mxCell id="Bill_f15" parent="Bill_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ pendingManualPayment : Boolean" vertex="1">
+          <mxGeometry height="26" width="360" y="394" as="geometry" />
+        </mxCell>
+        <mxCell id="Bill_f16" parent="Bill_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ paymentStatus : String" vertex="1">
+          <mxGeometry height="26" width="360" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="Bill_f17" parent="Bill_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ createdAt / updatedAt : Date" vertex="1">
+          <mxGeometry height="26" width="360" y="446" as="geometry" />
+        </mxCell>
+        <mxCell id="Payment_header" parent="1" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;" value="Payment" vertex="1">
+          <mxGeometry height="316" width="360" x="560" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="Payment_f1" parent="Payment_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ _id : String" vertex="1">
+          <mxGeometry height="26" width="360" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Payment_f2" parent="Payment_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;fontStyle=2;" value="+ billId : String (FK)" vertex="1">
+          <mxGeometry height="26" width="360" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="Payment_f3" parent="Payment_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;fontStyle=2;" value="+ patientId : String (FK)" vertex="1">
+          <mxGeometry height="26" width="360" y="82" as="geometry" />
+        </mxCell>
+        <mxCell id="Payment_f4" parent="Payment_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ amount : Number" vertex="1">
+          <mxGeometry height="26" width="360" y="108" as="geometry" />
+        </mxCell>
+        <mxCell id="Payment_f5" parent="Payment_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ currency : String" vertex="1">
+          <mxGeometry height="26" width="360" y="134" as="geometry" />
+        </mxCell>
+        <mxCell id="Payment_f6" parent="Payment_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ method : String" vertex="1">
+          <mxGeometry height="26" width="360" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="Payment_f7" parent="Payment_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ status : String" vertex="1">
+          <mxGeometry height="26" width="360" y="186" as="geometry" />
+        </mxCell>
+        <mxCell id="Payment_f8" parent="Payment_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ gatewayReference : String" vertex="1">
+          <mxGeometry height="26" width="360" y="212" as="geometry" />
+        </mxCell>
+        <mxCell id="Payment_f9" parent="Payment_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ metadata : Object" vertex="1">
+          <mxGeometry height="26" width="360" y="238" as="geometry" />
+        </mxCell>
+        <mxCell id="Payment_f10" parent="Payment_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ createdAt / updatedAt : Date" vertex="1">
+          <mxGeometry height="26" width="360" y="264" as="geometry" />
+        </mxCell>
+        <mxCell id="Receipt_header" parent="1" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" value="Receipt" vertex="1">
+          <mxGeometry height="212" width="360" x="60" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="Receipt_f1" parent="Receipt_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ _id : String" vertex="1">
+          <mxGeometry height="26" width="360" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Receipt_f2" parent="Receipt_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;fontStyle=2;" value="+ paymentId : String (FK)" vertex="1">
+          <mxGeometry height="26" width="360" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="Receipt_f3" parent="Receipt_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;fontStyle=2;" value="+ billId : String (FK)" vertex="1">
+          <mxGeometry height="26" width="360" y="82" as="geometry" />
+        </mxCell>
+        <mxCell id="Receipt_f4" parent="Receipt_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;fontStyle=2;" value="+ patientId : String (FK)" vertex="1">
+          <mxGeometry height="26" width="360" y="108" as="geometry" />
+        </mxCell>
+        <mxCell id="Receipt_f5" parent="Receipt_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ fhirPayload : Object" vertex="1">
+          <mxGeometry height="26" width="360" y="134" as="geometry" />
+        </mxCell>
+        <mxCell id="Receipt_f6" parent="Receipt_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ createdAt / updatedAt : Date" vertex="1">
+          <mxGeometry height="26" width="360" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="Prescription_header" parent="1" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" value="Prescription" vertex="1">
+          <mxGeometry height="526" width="360" x="1020" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="Rx_f1" parent="Prescription_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ _id : String" vertex="1">
+          <mxGeometry height="26" width="360" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Rx_f2" parent="Prescription_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ resourceType : String" vertex="1">
+          <mxGeometry height="26" width="360" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="Rx_f3" parent="Prescription_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ fhirId : String" vertex="1">
+          <mxGeometry height="26" width="360" y="82" as="geometry" />
+        </mxCell>
+        <mxCell id="Rx_f4" parent="Prescription_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ status : String" vertex="1">
+          <mxGeometry height="26" width="360" y="108" as="geometry" />
+        </mxCell>
+        <mxCell id="Rx_f5" parent="Prescription_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ intent : String" vertex="1">
+          <mxGeometry height="26" width="360" y="134" as="geometry" />
+        </mxCell>
+        <mxCell id="Rx_f6" parent="Prescription_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ medicationCodeableConcept : Object" vertex="1">
+          <mxGeometry height="26" width="360" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="Rx_f7" parent="Prescription_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ medicationReference : Object" vertex="1">
+          <mxGeometry height="26" width="360" y="186" as="geometry" />
+        </mxCell>
+        <mxCell id="Rx_f8" parent="Prescription_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ subject : Object" vertex="1">
+          <mxGeometry height="26" width="360" y="212" as="geometry" />
+        </mxCell>
+        <mxCell id="Rx_f9" parent="Prescription_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ encounter : Object" vertex="1">
+          <mxGeometry height="26" width="360" y="238" as="geometry" />
+        </mxCell>
+        <mxCell id="Rx_f10" parent="Prescription_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ authoredOn : Date" vertex="1">
+          <mxGeometry height="26" width="360" y="264" as="geometry" />
+        </mxCell>
+        <mxCell id="Rx_f11" parent="Prescription_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ requester : Object" vertex="1">
+          <mxGeometry height="26" width="360" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="Rx_f12" parent="Prescription_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ dosageInstruction : Array" vertex="1">
+          <mxGeometry height="26" width="360" y="316" as="geometry" />
+        </mxCell>
+        <mxCell id="Rx_f13" parent="Prescription_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ dispenseRequest : Object" vertex="1">
+          <mxGeometry height="26" width="360" y="342" as="geometry" />
+        </mxCell>
+        <mxCell id="Rx_f14" parent="Prescription_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ note : Array" vertex="1">
+          <mxGeometry height="26" width="360" y="368" as="geometry" />
+        </mxCell>
+        <mxCell id="Rx_f15" parent="Prescription_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;fontStyle=2;" value="+ patientId : String (FK)" vertex="1">
+          <mxGeometry height="26" width="360" y="394" as="geometry" />
+        </mxCell>
+        <mxCell id="Rx_f16" parent="Prescription_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;fontStyle=2;" value="+ linkedBillId : String (FK)" vertex="1">
+          <mxGeometry height="26" width="360" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="Rx_f17" parent="Prescription_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ releasedToPatient : Boolean" vertex="1">
+          <mxGeometry height="26" width="360" y="446" as="geometry" />
+        </mxCell>
+        <mxCell id="Rx_f18" parent="Prescription_header" style="text;align=left;strokeColor=none;fillColor=none;spacingLeft=8;" value="+ createdAt / updatedAt : Date" vertex="1">
+          <mxGeometry height="26" width="360" y="472" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_up" edge="1" parent="1" source="User_header" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;endFill=0;dashed=0;strokeColor=#6c8ebf;fontStyle=1;fontSize=10;" target="Patient_header" value="patientId">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_bp" edge="1" parent="1" source="Bill_header" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;endFill=0;dashed=0;strokeColor=#6c8ebf;fontStyle=1;fontSize=10;" target="Patient_header" value="patientId">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_pmb" edge="1" parent="1" source="Payment_header" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;endFill=0;dashed=0;strokeColor=#9673a6;fontStyle=1;fontSize=10;" target="Bill_header" value="billId">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_pmp" edge="1" parent="1" source="Payment_header" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;endFill=0;dashed=0;strokeColor=#9673a6;fontStyle=1;fontSize=10;" target="Patient_header" value="patientId">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_rcp" edge="1" parent="1" source="Receipt_header" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;endFill=0;dashed=0;strokeColor=#b85450;fontStyle=1;fontSize=10;" target="Payment_header" value="paymentId">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_rcb" edge="1" parent="1" source="Receipt_header" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;endFill=0;dashed=0;strokeColor=#b85450;fontStyle=1;fontSize=10;" target="Bill_header" value="billId">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_rcpt" edge="1" parent="1" source="Receipt_header" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;endFill=0;dashed=0;strokeColor=#b85450;fontStyle=1;fontSize=10;" target="Patient_header" value="patientId">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_rxp" edge="1" parent="1" source="Prescription_header" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;endFill=0;dashed=0;strokeColor=#d6b656;fontStyle=1;fontSize=10;" target="Patient_header" value="patientId">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_rxb" edge="1" parent="1" source="Prescription_header" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;endFill=0;dashed=1;strokeColor=#d6b656;fontStyle=1;fontSize=10;" target="Bill_header" value="linkedBillId">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
