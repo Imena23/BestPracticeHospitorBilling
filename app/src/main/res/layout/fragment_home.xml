@@ -280,28 +280,14 @@
             android:textStyle="bold" />
 
         <LinearLayout
+            android:id="@+id/recent_activity_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/card_background"
             android:orientation="vertical"
-            android:padding="16dp">
-
-            <include layout="@layout/item_activity_row"
-                android:id="@+id/row1" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/divider" />
-
-            <include layout="@layout/item_activity_row"
-                android:id="@+id/row2" />
-
-        </LinearLayout>
+            android:padding="16dp" />
 
     </LinearLayout>
 </ScrollView>

@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "medipay.db";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
 
     // Patients table
     public static final String TABLE_PATIENTS = "patients";
@@ -21,6 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_DOCTOR = "doctor";
     public static final String COL_ADMISSION = "admission_date";
     public static final String COL_BLOOD = "blood_type";
+    public static final String COL_PIN = "pin";
 
     // Bills table
     public static final String TABLE_BILLS = "bills";
@@ -45,7 +46,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COL_WARD + " TEXT, " +
                 COL_DOCTOR + " TEXT, " +
                 COL_ADMISSION + " TEXT, " +
-                COL_BLOOD + " TEXT)");
+                COL_BLOOD + " TEXT, " +
+                COL_PIN + " TEXT)");
 
         db.execSQL("CREATE TABLE " + TABLE_BILLS + " (" +
                 COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -77,6 +79,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         p1.put(COL_DOCTOR, "Dr. Sarah Mensah");
         p1.put(COL_ADMISSION, "March 28, 2026");
         p1.put(COL_BLOOD, "O+");
+        p1.put(COL_PIN, "1234");
         long id1 = db.insert(TABLE_PATIENTS, null, p1);
 
         // Bills for patient 1
@@ -95,6 +98,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         p2.put(COL_DOCTOR, "Dr. Kwame Asante");
         p2.put(COL_ADMISSION, "April 1, 2026");
         p2.put(COL_BLOOD, "A+");
+        p2.put(COL_PIN, "5678");
         long id2 = db.insert(TABLE_PATIENTS, null, p2);
 
         insertBill(db, "BILL-2026-0043", id2, "Consultation Fee", 150.00, "Apr 1, 2026", "unpaid");
@@ -114,13 +118,51 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert(TABLE_BILLS, null, v);
     }
 
-    // Login: match name (case-insensitive) and dob
-    public Cursor findPatient(String name, String dob) {
+    // Login: match name (case-insensitive), dob, and PIN
+    public Cursor findPatient(String name, String dob, String pin) {
         SQLiteDatabase db = getReadableDatabase();
         return db.query(TABLE_PATIENTS, null,
+                "LOWER(" + COL_NAME + ") = LOWER(?) AND " + COL_DOB + " = ? AND " + COL_PIN + " = ?",
+                new String[]{name.trim(), dob.trim(), pin.trim()},
+                null, null, null);
+    }
+
+    // Get patient by ID
+    public Cursor getPatientById(long id) {
+        SQLiteDatabase db = getReadableDatabase();
+        return db.query(TABLE_PATIENTS, null,
+                COL_ID + " = ?",
+                new String[]{String.valueOf(id)},
+                null, null, null);
+    }
+
+    // Register new patient
+    public long registerPatient(String name, String dob, String patientId, String pin) {
+        SQLiteDatabase db = getWritableDatabase();
+        
+        // Check if patient already exists
+        Cursor existing = db.query(TABLE_PATIENTS, null,
                 "LOWER(" + COL_NAME + ") = LOWER(?) AND " + COL_DOB + " = ?",
                 new String[]{name.trim(), dob.trim()},
                 null, null, null);
+        
+        if (existing != null && existing.moveToFirst()) {
+            existing.close();
+            return -1; // Already exists
+        }
+        if (existing != null) existing.close();
+
+        ContentValues values = new ContentValues();
+        values.put(COL_NAME, name);
+        values.put(COL_DOB, dob);
+        values.put(COL_PATIENT_ID, patientId);
+        values.put(COL_PIN, pin);
+        values.put(COL_WARD, "Not assigned");
+        values.put(COL_DOCTOR, "Not assigned");
+        values.put(COL_ADMISSION, "N/A");
+        values.put(COL_BLOOD, "Unknown");
+
+        return db.insert(TABLE_PATIENTS, null, values);
     }
 
     // Get all bills for a patient by their row id
@@ -129,6 +171,64 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.query(TABLE_BILLS, null,
                 COL_PATIENT_REF + " = ?",
                 new String[]{String.valueOf(patientId)},
+                null, null, COL_DATE + " DESC");
+    }
+
+    // Update bill status to paid
+    public boolean updateBillStatus(long patientId, String status) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_STATUS, status);
+        int rows = db.update(TABLE_BILLS, values,
+                COL_PATIENT_REF + " = ?",
+                new String[]{String.valueOf(patientId)});
+        return rows > 0;
+    }
+
+    // Get total paid amount for a patient
+    public double getTotalPaid(long patientId) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(TABLE_BILLS,
+                new String[]{COL_AMOUNT},
+                COL_PATIENT_REF + " = ? AND " + COL_STATUS + " = ?",
+                new String[]{String.valueOf(patientId), "paid"},
                 null, null, null);
+        double total = 0;
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                total += cursor.getDouble(0);
+            }
+            cursor.close();
+        }
+        return total;
+    }
+
+    // Get total unpaid amount for a patient
+    public double getTotalUnpaid(long patientId) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(TABLE_BILLS,
+                new String[]{COL_AMOUNT},
+                COL_PATIENT_REF + " = ? AND " + COL_STATUS + " = ?",
+                new String[]{String.valueOf(patientId), "unpaid"},
+                null, null, null);
+        double total = 0;
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                total += cursor.getDouble(0);
+            }
+            cursor.close();
+        }
+        return total;
+    }
+
+    // Reset bills to unpaid (for demo/testing)
+    public boolean resetBillsToUnpaid(long patientId) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_STATUS, "unpaid");
+        int rows = db.update(TABLE_BILLS, values,
+                COL_PATIENT_REF + " = ?",
+                new String[]{String.valueOf(patientId)});
+        return rows > 0;
     }
 }

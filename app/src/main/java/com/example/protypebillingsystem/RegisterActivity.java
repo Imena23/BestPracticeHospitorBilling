@@ -3,18 +3,16 @@ package com.example.protypebillingsystem;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Calendar;
 
-public class LoginActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
-    private EditText etName, etDob, etPin;
+    private EditText etName, etDob, etPatientId, etPin, etPinConfirm;
     private TextView tvError;
     private DatabaseHelper dbHelper;
 
@@ -33,18 +31,20 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
 
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
 
         dbHelper = new DatabaseHelper(this);
-        etName = findViewById(R.id.et_name);
-        etDob = findViewById(R.id.et_dob);
-        etPin = findViewById(R.id.et_pin);
-        tvError = findViewById(R.id.tv_error);
+        etName = findViewById(R.id.et_register_name);
+        etDob = findViewById(R.id.et_register_dob);
+        etPatientId = findViewById(R.id.et_register_patient_id);
+        etPin = findViewById(R.id.et_register_pin);
+        etPinConfirm = findViewById(R.id.et_register_pin_confirm);
+        tvError = findViewById(R.id.tv_register_error);
 
         etDob.setOnClickListener(v -> showDatePicker());
-        findViewById(R.id.btn_login).setOnClickListener(v -> attemptLogin());
-        findViewById(R.id.tv_goto_register).setOnClickListener(v -> {
-            startActivity(new Intent(this, RegisterActivity.class));
+        findViewById(R.id.btn_register).setOnClickListener(v -> attemptRegister());
+        findViewById(R.id.tv_goto_login).setOnClickListener(v -> {
+            startActivity(new Intent(this, LoginActivity.class));
             finish();
         });
     }
@@ -59,68 +59,45 @@ public class LoginActivity extends AppCompatActivity {
            cal.get(Calendar.DAY_OF_MONTH)).show();
     }
 
-    private void attemptLogin() {
+    private void attemptRegister() {
         String name = etName.getText().toString().trim();
         String dob = etDob.getText().toString().trim();
+        String patientId = etPatientId.getText().toString().trim();
         String pin = etPin.getText().toString().trim();
+        String pinConfirm = etPinConfirm.getText().toString().trim();
 
         if (name.isEmpty()) { showError("Please enter your full name"); return; }
         if (dob.isEmpty()) { showError("Please select your date of birth"); return; }
-        if (pin.isEmpty()) { showError("Please enter your 4-digit PIN"); return; }
+        if (pin.isEmpty()) { showError("Please create a 4-digit PIN"); return; }
         if (pin.length() != 4) { showError("PIN must be exactly 4 digits"); return; }
+        if (!pin.equals(pinConfirm)) { showError("PINs do not match"); return; }
 
-        Cursor cursor = dbHelper.findPatient(name, dob, pin);
-
-        if (cursor != null && cursor.moveToFirst()) {
-            PatientSession session = PatientSession.getInstance();
-            session.id = cursor.getLong(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_ID));
-            session.name = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_NAME));
-            session.dob = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_DOB));
-            session.patientId = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_PATIENT_ID));
-            session.ward = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_WARD));
-            session.doctor = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_DOCTOR));
-            session.admissionDate = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_ADMISSION));
-            session.bloodType = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_BLOOD));
-            cursor.close();
-
-            Cursor bills = dbHelper.getBillsForPatient(session.id);
-            double total = 0;
-            String billId = "";
-            if (bills != null) {
-                while (bills.moveToNext()) {
-                    total += bills.getDouble(bills.getColumnIndexOrThrow(DatabaseHelper.COL_AMOUNT));
-                    billId = bills.getString(bills.getColumnIndexOrThrow(DatabaseHelper.COL_BILL_ID));
-                }
-                bills.close();
-            }
-            session.totalBill = total;
-            session.billId = billId;
-            session.paidAmount = dbHelper.getTotalPaid(session.id);
-            session.unpaidAmount = dbHelper.getTotalUnpaid(session.id);
-
-            // Save login session
-            SharedPreferences prefs = getSharedPreferences("MediPayPrefs", MODE_PRIVATE);
-            prefs.edit()
-                    .putBoolean("isLoggedIn", true)
-                    .putLong("patientId", session.id)
-                    .apply();
-
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-        } else {
-            if (cursor != null) cursor.close();
-            showError("Incorrect name, date of birth, or PIN.\nPlease check your details or contact reception.");
+        // Auto-generate patient ID if not provided
+        if (patientId.isEmpty()) {
+            patientId = "PAT-" + System.currentTimeMillis();
         }
-    }
 
-    private void showError(String msg) {
-        tvError.setText(msg);
-        tvError.setVisibility(View.VISIBLE);
+        // Register user in database
+        long newPatientId = dbHelper.registerPatient(name, dob, patientId, pin);
+        if (newPatientId == -1) {
+            showError("Registration failed. This name and DOB may already exist.");
+            return;
+        }
+
+        // Save login session
+        SharedPreferences prefs = getSharedPreferences("MediPayPrefs", MODE_PRIVATE);
+        prefs.edit()
+                .putBoolean("isLoggedIn", true)
+                .putLong("patientId", newPatientId)
+                .apply();
+
+        // Load session and navigate
+        loadSessionAndNavigate(newPatientId);
     }
 
     private void loadSessionAndNavigate(long patientId) {
         DatabaseHelper db = new DatabaseHelper(this);
-        Cursor cursor = db.getPatientById(patientId);
+        android.database.Cursor cursor = db.getPatientById(patientId);
 
         if (cursor != null && cursor.moveToFirst()) {
             PatientSession session = PatientSession.getInstance();
@@ -134,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
             session.bloodType = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_BLOOD));
             cursor.close();
 
-            Cursor bills = db.getBillsForPatient(session.id);
+            android.database.Cursor bills = db.getBillsForPatient(session.id);
             double total = 0;
             String billId = "";
             if (bills != null) {
@@ -155,6 +132,12 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             if (cursor != null) cursor.close();
             db.close();
+            showError("Failed to load patient data");
         }
+    }
+
+    private void showError(String msg) {
+        tvError.setText(msg);
+        tvError.setVisibility(View.VISIBLE);
     }
 }

@@ -14,12 +14,9 @@ public class PatientSession {
     public String admissionDate;
     public String bloodType;
     public double totalBill;
+    public double paidAmount;
+    public double unpaidAmount;
     public String billId;
-    
-    // Insurance Details
-    public String insuranceProvider;
-    public double insuranceCoverage; // Amount or percentage? Let's use amount for simplicity
-    public double netPayable;
 
     private PatientSession() {}
 
@@ -37,5 +34,9 @@ public class PatientSession {
         String[] parts = name.trim().split("\\s+");
         if (parts.length >= 2) return String.valueOf(parts[0].charAt(0)) + parts[1].charAt(0);
         return String.valueOf(parts[0].charAt(0));
+    }
+
+    public boolean isFullyPaid() {
+        return unpaidAmount <= 0;
     }
 }
