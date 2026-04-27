@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -16,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Consultation Fee"
-            android:textColor="@color/text_primary"
+            android:textColor="@color/md_on_surface"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -26,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:text="Mar 28, 2026"
-            android:textColor="@color/text_secondary"
+            android:textColor="@color/md_on_surface_variant"
             android:textSize="12sp" />
 
     </LinearLayout>
@@ -35,8 +37,8 @@
         android:id="@+id/tv_activity_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="$150.00"
-        android:textColor="@color/accent_red"
+        android:text="RWF 0"
+        android:textColor="@color/md_error"
         android:textSize="14sp"
         android:textStyle="bold" />
 
