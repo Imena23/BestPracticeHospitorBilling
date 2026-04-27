@@ -252,7 +252,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 👥 Contributors
 
-- **Mucyo Joel** - Initial work and feature development
+- **Group AA** - Initial work and feature development
 
 ## 📞 Support
 
