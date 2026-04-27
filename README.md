@@ -1,93 +1,368 @@
-# billing app
+# MediPay - Patient Billing Portal
 
+A modern Android application for hospital patient billing management with integrated mobile money and card payment systems.
 
+## 📱 Features
 
-## Getting started
+### 🔐 User Authentication
+- **Registration System**: New patients can register with name, date of birth, patient ID, and secure 4-digit PIN
+- **Persistent Login**: Auto-login on app restart using SharedPreferences
+- **Secure Authentication**: PIN-based login with validation
+- **FHIR Synchronization**: Patient data synced to hospital FHIR server on registration
+- **Material Design Inputs**: Outlined text fields with icons and password toggle
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+### 💳 Payment Systems
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+#### MTN Mobile Money
+- Realistic USSD-style payment flow
+- Transaction selection prompt
+- PIN entry screen with authentic MTN styling
+- Real-time payment processing simulation
+- Transaction ID generation
+- Success/failure notifications
 
-## Add your files
+#### Visa/Mastercard Payment
+- Professional card payment interface
+- Auto-formatting for card numbers (spaces every 4 digits)
+- Auto-formatting for expiry dates (MM/YY)
+- CVV validation
+- Secure payment processing with SSL badge
+- Masked card display on success
 
-* [Create](https://docs.gitlab.com/user/project/repository/web_editor/#create-a-file) or [upload](https://docs.gitlab.com/user/project/repository/web_editor/#upload-a-file) files
-* [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+### 📊 Dashboard & Billing
+- **Home Dashboard**: Overview of outstanding balance, ward location, and recent activity
+- **Bills Management**: Itemized bill breakdown with paid/unpaid status badges
+- **Payment History**: Track all completed payments
+- **QR Code Generation**: Generate QR codes for cashier payments
+- **Profile Management**: View patient information and medical details
+- **FHIR Integration**: Bills can be exported as FHIR Claim resources
+- **Real-time Sync**: Snackbar notifications for hospital system synchronization
+
+### 💰 Currency Support
+- All amounts displayed in **RWF (Rwandan Franc)**
+- Conversion rate: 1 USD = 1,300 RWF
+- Formatted currency display with thousand separators
+
+### 🧪 Testing Features
+- **Demo Accounts**: Pre-seeded test accounts for quick testing
+- **Reset Bills**: Reset demo bills to unpaid status for repeated testing
+- **Sample Data**: Pre-populated bills and patient records
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Android Studio Arctic Fox or later
+- Android SDK 24 or higher
+- Gradle 8.0+
+- Java 11
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://gitlab.com/mucyojoel505/billing-app.git
+   cd billing-app
+   ```
+
+2. **Open in Android Studio**
+   - Open Android Studio
+   - Select "Open an Existing Project"
+   - Navigate to the cloned directory
+   - Wait for Gradle sync to complete
+
+3. **Run the app**
+   - Connect an Android device or start an emulator
+   - Click the "Run" button or press `Shift + F10`
+
+## 👤 Demo Accounts
+
+### Test Account 1
+- **Name**: John Doe
+- **Date of Birth**: 15/03/1990
+- **PIN**: 1234
+- **Outstanding Balance**: RWF 3,185,000 (5 unpaid bills)
+
+### Test Account 2
+- **Name**: Jane Smith
+- **Date of Birth**: 22/07/1985
+- **PIN**: 5678
+- **Outstanding Balance**: RWF 1,209,000 (3 unpaid bills)
+
+## 🧭 App Navigation
+
+### 1. Registration/Login
+- First launch shows registration screen
+- Existing users can tap "Already have an account? Login"
+- Enter credentials to access the app
+
+### 2. Home Tab
+- View outstanding balance in RWF
+- See current ward location
+- Quick access to bills and payment history
+- Recent activity feed
+
+### 3. Bills Tab
+- View total charges and amount paid
+- Itemized bill breakdown with status badges
+- Generate QR code for payment
+- See grand total of unpaid bills
+
+### 4. Payments Tab
+- Outstanding balance display
+- Payment method selection:
+  - 📱 MTN Mobile Money
+  - 💳 POS Card (Visa/Mastercard)
+  - 💵 Cash at Cashier
+- Payment history with transaction details
+
+### 5. Profile Tab
+- Patient information display
+- Ward, doctor, admission date, blood type
+- Digital receipt section
+- Logout button
+- Reset demo bills (for testing)
+
+## 💳 Testing Payments
+
+### MTN Mobile Money Flow
+1. Tap "Mobile Money" on Payments tab
+2. Enter MTN phone number (e.g., `078XXXXXXX` or `78XXXXXXX`)
+3. Tap "Send Payment Prompt"
+4. Wait for USSD prompt (2 seconds)
+5. Select transaction by tapping "Reply"
+6. Enter any 4-5 digit PIN
+7. Tap "Reply" to confirm
+8. View success screen with transaction details
+
+**Valid MTN Prefixes**: 078, 079, 083, 073
+
+### Card Payment Flow
+1. Tap "POS Card" on Payments tab
+2. Enter card details:
+   - **Card Number**: Any 13-19 digit number (e.g., `4532123456789012`)
+   - **Cardholder Name**: Any name in CAPS (e.g., `JOHN DOE`)
+   - **Expiry Date**: Any future date (e.g., `12/28`)
+   - **CVV**: Any 3-4 digits (e.g., `123`)
+3. Tap "Pay Now"
+4. Wait for processing (2 seconds)
+5. View success screen with masked card number
+
+## 🗄️ Database Schema
+
+### Patients Table
+- `id` (Primary Key)
+- `name` (TEXT)
+- `dob` (TEXT)
+- `patient_id` (TEXT)
+- `ward` (TEXT)
+- `doctor` (TEXT)
+- `admission_date` (TEXT)
+- `blood_type` (TEXT)
+- `pin` (TEXT)
+
+### Bills Table
+- `id` (Primary Key)
+- `bill_id` (TEXT)
+- `patient_ref` (INTEGER, Foreign Key)
+- `item` (TEXT)
+- `amount` (REAL)
+- `date` (TEXT)
+- `status` (TEXT: 'paid' or 'unpaid')
+
+## 🎨 Design System
+
+### Colors
+- **Primary Blue**: `#1565C0`
+- **MTN Yellow**: `#FFCC00`
+- **Success Green**: `#2E7D32`
+- **Pending Yellow**: `#F9A825`
+- **Error Red**: `#C62828`
+- **Background**: `#F5F7FA`
+
+### Typography
+- **Headers**: Bold, 20-26sp
+- **Body**: Regular, 14-16sp
+- **Captions**: Regular, 11-13sp
+
+## 📦 Project Structure
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/mucyojoel505/billing-app.git
-git branch -M main
-git push -uf origin main
+app/src/main/
+├── java/com/example/protypebillingsystem/
+│   ├── MainActivity.java
+│   ├── RegisterActivity.java
+│   ├── LoginActivity.java
+│   ├── HomeFragment.java
+│   ├── BillsFragment.java
+│   ├── PaymentsFragment.java
+│   ├── ProfileFragment.java
+│   ├── DatabaseHelper.java
+│   ├── PatientSession.java
+│   ├── MtnMomoDialog.java
+│   ├── CardPaymentDialog.java
+│   └── fhir/
+│       ├── FhirClient.java
+│       ├── FhirApiService.java
+│       └── models/
+│           ├── FhirPatient.java
+│           ├── FhirClaim.java
+│           └── FhirBundle.java
+├── res/
+│   ├── layout/
+│   │   ├── activity_main.xml
+│   │   ├── activity_register.xml
+│   │   ├── activity_login.xml
+│   │   ├── fragment_*.xml
+│   │   ├── dialog_mtn_*.xml
+│   │   └── dialog_card_payment.xml
+│   ├── drawable/
+│   │   ├── mtn_*.xml
+│   │   ├── ussd_*.xml
+│   │   └── btn_*.xml
+│   └── values/
+│       ├── colors.xml
+│       ├── strings.xml
+│       └── themes.xml
+└── AndroidManifest.xml
 ```
 
-## Integrate with your tools
+## 🔧 Technical Stack
 
-* [Set up project integrations](https://gitlab.com/mucyojoel505/billing-app/-/settings/integrations)
+- **Language**: Java
+- **Min SDK**: 24 (Android 7.0)
+- **Target SDK**: 36
+- **Database**: SQLite (local storage)
+- **Architecture**: Fragment-based with Bottom Navigation
+- **Storage**: SharedPreferences for session management
+- **UI Framework**: Material Design Components (MDC) 1.13.0
+  - TextInputLayout with outlined style and icons
+  - MaterialButton with elevation and ripple effects
+  - BottomNavigationView for tab navigation
+  - Snackbar for user feedback
+  - Material themes and color system
+  - Password toggle for secure inputs
+- **Healthcare Interoperability**: HL7 FHIR R4
+  - FHIR Patient resource for demographics
+  - FHIR Claim resource for billing data
+  - HAPI FHIR public test server integration
+  - Retrofit 2.9.0 for REST API calls
+  - Gson for JSON serialization
+  - Real-time synchronization with hospital systems
 
-## Collaborate with your team
+## 🐛 Known Limitations
 
-* [Invite team members and collaborators](https://docs.gitlab.com/user/project/members/)
-* [Create a new merge request](https://docs.gitlab.com/user/project/merge_requests/creating_merge_requests/)
-* [Automatically close issues from merge requests](https://docs.gitlab.com/user/project/issues/managing_issues/#closing-issues-automatically)
-* [Enable merge request approvals](https://docs.gitlab.com/user/project/merge_requests/approvals/)
-* [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+- Payment processing is simulated (no real payment gateway integration)
+- No backend API integration
+- No email/SMS notifications
+- No receipt PDF generation
+- No multi-language support (English only)
+- No biometric authentication
 
-## Test and Deploy
+## 🚧 Future Enhancements
 
-Use the built-in continuous integration in GitLab.
+- [ ] Integrate real payment gateways (Flutterwave, Paystack)
+- [ ] Add backend API for real-time data sync
+- [ ] Implement receipt PDF generation and email delivery
+- [ ] Add push notifications for payment reminders
+- [ ] Support multiple languages (Kinyarwanda, French)
+- [ ] Add biometric authentication (fingerprint/face)
+- [ ] Implement payment plans for large bills
+- [ ] Add insurance claim integration
+- [ ] Dark mode support
+- [ ] Offline mode with sync
+- [ ] FHIR Observation resource for lab results
+- [ ] FHIR Medication resource for prescriptions
+- [ ] FHIR Appointment resource for scheduling
+- [ ] Real-time FHIR subscriptions
+- [ ] OAuth2 authentication for production FHIR server
 
-* [Get started with GitLab CI/CD](https://docs.gitlab.com/ci/quick_start/)
-* [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/user/application_security/sast/)
-* [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/topics/autodevops/requirements/)
-* [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/user/clusters/agent/)
-* [Set up protected environments](https://docs.gitlab.com/ci/environments/protected_environments/)
+## 🏥 FHIR Integration
 
-***
+This app integrates with **HL7 FHIR R4** (Fast Healthcare Interoperability Resources) standard for healthcare data exchange.
 
-# Editing this README
+### FHIR Server
+- **Server**: HAPI FHIR Public Test Server
+- **Base URL**: `https://hapi.fhir.org/baseR4/`
+- **Documentation**: https://hapi.fhir.org/
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+### FHIR Resources Used
 
-## Suggestions for a good README
+#### Patient Resource
+Represents patient demographic and administrative data:
+- Patient ID (identifier)
+- Full name
+- Date of birth
+- Gender
+- Contact information
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+#### Claim Resource
+Represents bills and invoices for healthcare services:
+- Bill ID
+- Patient reference
+- Service items
+- Amounts in RWF
+- Bill status (active/paid)
 
-## Name
-Choose a self-explaining name for your project.
+### FHIR Features
+- ✅ **Registration Sync**: New patients automatically created on FHIR server
+- ✅ **Login Verification**: Patient data verified with FHIR server on login
+- ✅ **Background Sync**: Non-blocking API calls with Snackbar feedback
+- ✅ **Graceful Fallback**: App works offline if FHIR server unavailable
+- ✅ **Interoperability**: Data can be shared with other healthcare systems
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+### Viewing FHIR Data
+Visit the HAPI FHIR server to view synced patient data:
+https://hapi.fhir.org/resource?serverId=home_r4&pretty=true&resource=Patient
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+For detailed FHIR documentation, see **[FHIR_INTEGRATION.md](FHIR_INTEGRATION.md)**
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+## 🎨 Material Design Components
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+This app showcases modern Material Design Components:
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+### Input Fields
+- **TextInputLayout**: Outlined style with floating labels
+- **Icons**: Start icons for visual context (calendar, lock, etc.)
+- **Password Toggle**: Eye icon to show/hide PIN
+- **Helper Text**: Contextual hints below fields
+- **Error States**: Red error messages with validation
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+### Buttons
+- **MaterialButton**: Elevated primary buttons with ripple effects
+- **Outlined Buttons**: Secondary actions with stroke borders
+- **Corner Radius**: Rounded corners (8dp) for modern look
+- **State Animations**: Smooth press and release animations
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+### Feedback
+- **Snackbar**: Bottom notifications for sync status
+- **Material Colors**: Primary blue theme with accent colors
+- **Ripple Effects**: Touch feedback on all interactive elements
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+### Navigation
+- **BottomNavigationView**: Tab-based navigation with icons
+- **Material Transitions**: Smooth fragment transitions
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+## 📄 License
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+## 👥 Contributors
 
-## License
-For open source projects, say how it is licensed.
+- **Group AA** - Initial work and feature development
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+## 📞 Support
+
+For issues, questions, or contributions, please open an issue on GitLab:
+https://gitlab.com/mucyojoel505/billing-app/-/issues
+
+## 🙏 Acknowledgments
+
+- MTN Rwanda for payment flow inspiration
+- Material Design guidelines for UI/UX patterns
+- Android community for best practices
+
+---
+
+**Version**: 1.0.0  
+**Last Updated**: April 2026  
+**Status**: Active Development
