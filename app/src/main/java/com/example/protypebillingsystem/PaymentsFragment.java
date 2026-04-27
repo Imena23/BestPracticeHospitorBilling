@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import com.google.android.material.chip.Chip;
 import java.util.Locale;
 
 public class PaymentsFragment extends Fragment {
@@ -50,16 +51,15 @@ public class PaymentsFragment extends Fragment {
         if (tvBalance != null) tvBalance.setText(
                 String.format(Locale.getDefault(), "RWF %,.0f", s.unpaidAmount * 1300));
 
-        // Status badge
-        TextView tvStatus = view.findViewById(R.id.tv_payment_status);
-        if (tvStatus != null) {
+        // Status badge (now a Chip)
+        Chip chipStatus = view.findViewById(R.id.badge_payment_status);
+        if (chipStatus != null) {
             boolean allPaid = s.unpaidAmount <= 0;
-            tvStatus.setText(allPaid ? "Paid" : "Pending");
-            tvStatus.setTextColor(getResources().getColor(
+            chipStatus.setText(allPaid ? "Paid" : "Pending");
+            chipStatus.setTextColor(getResources().getColor(
                     allPaid ? R.color.accent_green : R.color.pending_yellow, null));
-            View badge = view.findViewById(R.id.badge_payment_status);
-            if (badge != null) badge.setBackgroundResource(
-                    allPaid ? R.drawable.status_badge_paid : R.drawable.status_badge_pending);
+            chipStatus.setChipBackgroundColorResource(
+                    allPaid ? R.color.accent_green_light : R.color.pending_yellow_light);
         }
 
         // Payment history list

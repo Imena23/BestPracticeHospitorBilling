@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import com.google.android.material.chip.Chip;
 import java.util.Locale;
 
 public class BillsFragment extends Fragment {
@@ -56,23 +56,19 @@ public class BillsFragment extends Fragment {
                     TextView tvName = row.findViewById(R.id.tv_bill_item_name);
                     TextView tvDate = row.findViewById(R.id.tv_bill_item_date);
                     TextView tvAmount = row.findViewById(R.id.tv_bill_item_amount);
-                    TextView tvStatus = row.findViewById(R.id.tv_bill_status);
-                    FrameLayout badge = row.findViewById(R.id.badge_status);
+                    Chip chipStatus = row.findViewById(R.id.tv_bill_status);
 
                     if (tvName != null) tvName.setText(item);
                     if (tvDate != null) tvDate.setText(date);
                     if (tvAmount != null) tvAmount.setText(String.format(Locale.getDefault(), "RWF %,.0f", amount * 1300));
 
                     boolean isPaid = "paid".equalsIgnoreCase(status);
-                    if (tvStatus != null) {
-                        tvStatus.setText(isPaid ? "Paid" : "Unpaid");
-                        tvStatus.setTextColor(getResources().getColor(
+                    if (chipStatus != null) {
+                        chipStatus.setText(isPaid ? "Paid" : "Unpaid");
+                        chipStatus.setTextColor(getResources().getColor(
                                 isPaid ? R.color.accent_green : R.color.pending_yellow, null));
-                    }
-                    if (badge != null) {
-                        badge.setBackgroundResource(isPaid
-                                ? R.drawable.status_badge_paid
-                                : R.drawable.status_badge_pending);
+                        chipStatus.setChipBackgroundColorResource(
+                                isPaid ? R.color.accent_green_light : R.color.pending_yellow_light);
                     }
 
                     billContainer.addView(row);
