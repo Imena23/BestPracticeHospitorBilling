@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@color/md_background"
     android:fillViewport="true">
 
     <LinearLayout
@@ -12,11 +12,11 @@
         android:orientation="vertical"
         android:paddingBottom="16dp">
 
-        <!-- Header -->
+        <!-- MDC Top App Bar style header -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/primary_blue"
+            android:background="@color/md_primary"
             android:orientation="horizontal"
             android:padding="20dp"
             android:gravity="center_vertical">
@@ -31,7 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/welcome_back"
-                    android:textColor="#B3FFFFFF"
+                    android:textColor="@color/md_primary_container"
                     android:textSize="13sp" />
 
                 <TextView
@@ -39,16 +39,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="John Doe"
-                    android:textColor="@color/white"
+                    android:textColor="@color/md_on_primary"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
 
-            <FrameLayout
+            <!-- MDC Avatar using ShapeableImageView style -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@drawable/avatar_bg">
+                app:cardCornerRadius="24dp"
+                app:cardBackgroundColor="@color/md_primary_container"
+                app:cardElevation="0dp">
 
                 <TextView
                     android:id="@+id/tv_avatar_initials"
@@ -56,122 +59,135 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="JD"
-                    android:textColor="@color/white"
+                    android:textColor="@color/md_on_primary_container"
                     android:textSize="16sp"
                     android:textStyle="bold" />
-            </FrameLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 
-        <!-- Location Card -->
-        <LinearLayout
+        <!-- Location Card (MDC ElevatedCard) -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/card_background"
-            android:orientation="horizontal"
-            android:padding="14dp"
-            android:gravity="center_vertical">
+            app:cardCornerRadius="12dp"
+            app:cardElevation="1dp"
+            app:cardBackgroundColor="@color/md_surface">
 
-            <TextView
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/current_location"
-                android:textColor="@color/text_secondary"
-                android:textSize="13sp" />
+                android:orientation="horizontal"
+                android:padding="14dp"
+                android:gravity="center_vertical">
 
-            <TextView
-                android:id="@+id/tv_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ward A - Room 203"
-                android:textColor="@color/primary_blue"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/current_location"
+                    android:textColor="@color/md_on_surface_variant"
+                    android:textSize="13sp" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ward A - Room 203"
+                    android:textColor="@color/md_primary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
-        <!-- Bill Total Card -->
-        <LinearLayout
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Bill Total Card (MDC FilledCard with primary color) -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/bill_card_background"
-            android:orientation="vertical"
-            android:padding="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/current_bill_total"
-                android:textColor="#B3FFFFFF"
-                android:textSize="13sp" />
-
-            <TextView
-                android:id="@+id/tv_bill_total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="$2,450.00"
-                android:textColor="@color/white"
-                android:textSize="32sp"
-                android:textStyle="bold" />
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/md_primary">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:orientation="vertical"
+                android:padding="20dp">
 
-                <FrameLayout
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/status_badge_pending"
-                    android:paddingStart="10dp"
-                    android:paddingTop="4dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="4dp">
+                    android:text="@string/current_bill_total"
+                    android:textColor="@color/md_primary_container"
+                    android:textSize="13sp" />
 
-                    <TextView
+                <TextView
+                    android:id="@+id/tv_bill_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="RWF 0"
+                    android:textColor="@color/md_on_primary"
+                    android:textSize="32sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <!-- MDC Chip-style badge -->
+                    <com.google.android.material.chip.Chip
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/pending_payment"
                         android:textColor="@color/pending_yellow"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-                </FrameLayout>
+                        app:chipBackgroundColor="#33F9A825"
+                        app:chipStrokeColor="@color/pending_yellow"
+                        app:chipStrokeWidth="1dp"
+                        style="@style/Widget.Material3.Chip.Assist"
+                        android:clickable="false"
+                        android:focusable="false" />
 
-                <TextView
-                    android:id="@+id/tv_due_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:text="Payment due by April 10, 2026"
-                    android:textColor="#B3FFFFFF"
-                    android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/tv_due_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:text="Payment due by April 10, 2026"
+                        android:textColor="@color/md_primary_container"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <!-- MDC Outlined Button on dark background -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_view_bill"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/view_bill_details"
+                    android:textColor="@color/md_on_primary"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    app:strokeColor="@color/md_on_primary"
+                    app:cornerRadius="8dp" />
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btn_view_bill"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/btn_outline"
-                android:text="@string/view_bill_details"
-                android:textColor="@color/primary_blue"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+        </com.google.android.material.card.MaterialCardView>
 
-        </LinearLayout>
-
-        <!-- Quick Actions -->
+        <!-- Quick Actions label -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -179,10 +195,11 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="12dp"
             android:text="@string/quick_actions"
-            android:textColor="@color/text_primary"
+            android:textColor="@color/md_on_surface"
             android:textSize="16sp"
             android:textStyle="bold" />
 
+        <!-- Quick Action Cards (MDC ElevatedCard) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -191,83 +208,105 @@
             android:orientation="horizontal"
             android:weightSum="2">
 
-            <!-- View Bills -->
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/action_view_bills"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/card_background"
-                android:gravity="center"
-                android:orientation="vertical"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/md_surface"
+                app:rippleColor="@color/md_primary_container">
 
-                <FrameLayout
-                    android:layout_width="44dp"
-                    android:layout_height="44dp"
-                    android:background="@drawable/quick_action_bg">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        app:cardCornerRadius="22dp"
+                        app:cardBackgroundColor="@color/md_primary_container"
+                        app:cardElevation="0dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="📋"
+                            android:textSize="20sp" />
+
+                    </com.google.android.material.card.MaterialCardView>
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="📋"
-                        android:textSize="20sp" />
-                </FrameLayout>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/view_bills"
+                        android:textColor="@color/md_on_surface"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/view_bills"
-                    android:textColor="@color/text_primary"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
+                </LinearLayout>
 
-            </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-            <!-- Payment History -->
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/action_payment_history"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                android:background="@drawable/card_background"
-                android:gravity="center"
-                android:orientation="vertical"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/md_surface"
+                app:rippleColor="@color/md_primary_container">
 
-                <FrameLayout
-                    android:layout_width="44dp"
-                    android:layout_height="44dp"
-                    android:background="@drawable/quick_action_bg">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        app:cardCornerRadius="22dp"
+                        app:cardBackgroundColor="@color/md_secondary_container"
+                        app:cardElevation="0dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="💳"
+                            android:textSize="20sp" />
+
+                    </com.google.android.material.card.MaterialCardView>
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="💳"
-                        android:textSize="20sp" />
-                </FrameLayout>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/payment_history"
+                        android:textColor="@color/md_on_surface"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/payment_history"
-                    android:textColor="@color/text_primary"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
+                </LinearLayout>
 
-            </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 
-        <!-- Recent Activity -->
+        <!-- Recent Activity label -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -275,19 +314,28 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="12dp"
             android:text="Recent Activity"
-            android:textColor="@color/text_primary"
+            android:textColor="@color/md_on_surface"
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <LinearLayout
-            android:id="@+id/recent_activity_container"
+        <!-- Recent Activity Card (MDC ElevatedCard) -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/card_background"
-            android:orientation="vertical"
-            android:padding="16dp" />
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/md_surface">
+
+            <LinearLayout
+                android:id="@+id/recent_activity_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp" />
+
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 </ScrollView>
