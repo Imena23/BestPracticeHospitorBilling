@@ -4,17 +4,27 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.protypebillingsystem.fhir.FhirClient;
+import com.example.protypebillingsystem.fhir.models.FhirPatient;
+import com.google.android.material.snackbar.Snackbar;
+import java.util.Arrays;
 import java.util.Calendar;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    private static final String TAG = "RegisterActivity";
     private EditText etName, etDob, etPatientId, etPin, etPinConfirm;
     private TextView tvError;
     private DatabaseHelper dbHelper;
+    private View rootView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_register);
 
+        rootView = findViewById(android.R.id.content);
         dbHelper = new DatabaseHelper(this);
         etName = findViewById(R.id.et_register_name);
         etDob = findViewById(R.id.et_register_dob);
@@ -84,15 +95,70 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
+        // Create patient on FHIR server
+        createFhirPatient(name, dob, patientId, newPatientId);
+    }
+
+    private void createFhirPatient(String name, String dob, String patientId, long localPatientId) {
+        // Convert DD/MM/YYYY to YYYY-MM-DD for FHIR
+        String[] parts = dob.split("/");
+        String fhirDate = parts[2] + "-" + parts[1] + "-" + parts[0];
+
+        FhirPatient patient = new FhirPatient();
+        patient.setName(Arrays.asList(new FhirPatient.HumanName(name)));
+        patient.setBirthDate(fhirDate);
+        patient.setIdentifier(Arrays.asList(
+                new FhirPatient.Identifier("http://medipay.rw/patients", patientId)
+        ));
+
+        // Show loading snackbar
+        Snackbar loadingSnack = Snackbar.make(rootView, "Syncing with hospital system...", Snackbar.LENGTH_INDEFINITE);
+        loadingSnack.show();
+
+        FhirClient.getInstance()
+                .getApiService()
+                .createPatient(patient)
+                .enqueue(new Callback<FhirPatient>() {
+                    @Override
+                    public void onResponse(Call<FhirPatient> call, Response<FhirPatient> response) {
+                        loadingSnack.dismiss();
+                        if (response.isSuccessful() && response.body() != null) {
+                            String fhirId = response.body().getId();
+                            Log.d(TAG, "Patient created on FHIR server with ID: " + fhirId);
+                            
+                            Snackbar.make(rootView, "✓ Synced with hospital system", Snackbar.LENGTH_SHORT).show();
+                            
+                            // Save login session and navigate
+                            saveSessionAndNavigate(localPatientId);
+                        } else {
+                            Log.w(TAG, "FHIR patient creation failed: " + response.code());
+                            // Continue anyway - local registration succeeded
+                            Snackbar.make(rootView, "Registered locally (hospital sync pending)", Snackbar.LENGTH_SHORT).show();
+                            saveSessionAndNavigate(localPatientId);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<FhirPatient> call, Throwable t) {
+                        loadingSnack.dismiss();
+                        Log.e(TAG, "FHIR patient creation error", t);
+                        // Continue anyway - local registration succeeded
+                        Snackbar.make(rootView, "Registered locally (hospital sync pending)", Snackbar.LENGTH_SHORT).show();
+                        saveSessionAndNavigate(localPatientId);
+                    }
+                });
+    }
+
+    private void saveSessionAndNavigate(long patientId) {
         // Save login session
         SharedPreferences prefs = getSharedPreferences("MediPayPrefs", MODE_PRIVATE);
         prefs.edit()
                 .putBoolean("isLoggedIn", true)
-                .putLong("patientId", newPatientId)
+                .putLong("patientId", patientId)
                 .apply();
 
         // Load session and navigate
-        loadSessionAndNavigate(newPatientId);
+        loadSessionAndNavigate(patientId);
     }
 
     private void loadSessionAndNavigate(long patientId) {

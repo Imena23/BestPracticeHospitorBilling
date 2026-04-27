@@ -5,18 +5,27 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.protypebillingsystem.fhir.FhirClient;
+import com.example.protypebillingsystem.fhir.models.FhirBundle;
+import com.google.android.material.snackbar.Snackbar;
 import java.util.Calendar;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private static final String TAG = "LoginActivity";
     private EditText etName, etDob, etPin;
     private TextView tvError;
     private DatabaseHelper dbHelper;
+    private View rootView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
+        rootView = findViewById(android.R.id.content);
         dbHelper = new DatabaseHelper(this);
         etName = findViewById(R.id.et_name);
         etDob = findViewById(R.id.et_dob);
@@ -72,6 +82,9 @@ public class LoginActivity extends AppCompatActivity {
         Cursor cursor = dbHelper.findPatient(name, dob, pin);
 
         if (cursor != null && cursor.moveToFirst()) {
+            // Verify with FHIR server in background
+            verifyWithFhirServer(name, dob);
+            
             PatientSession session = PatientSession.getInstance();
             session.id = cursor.getLong(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_ID));
             session.name = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_NAME));
@@ -116,6 +129,32 @@ public class LoginActivity extends AppCompatActivity {
     private void showError(String msg) {
         tvError.setText(msg);
         tvError.setVisibility(View.VISIBLE);
+    }
+
+    private void verifyWithFhirServer(String name, String dob) {
+        // Convert DD/MM/YYYY to YYYY-MM-DD for FHIR
+        String[] parts = dob.split("/");
+        String fhirDate = parts[2] + "-" + parts[1] + "-" + parts[0];
+
+        FhirClient.getInstance()
+                .getApiService()
+                .searchPatients(name, fhirDate)
+                .enqueue(new Callback<FhirBundle>() {
+                    @Override
+                    public void onResponse(Call<FhirBundle> call, Response<FhirBundle> response) {
+                        if (response.isSuccessful() && response.body() != null && response.body().getTotal() > 0) {
+                            Log.d(TAG, "Patient verified on FHIR server");
+                            Snackbar.make(rootView, "✓ Verified with hospital system", Snackbar.LENGTH_SHORT).show();
+                        } else {
+                            Log.d(TAG, "Patient not found on FHIR server (local only)");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<FhirBundle> call, Throwable t) {
+                        Log.e(TAG, "FHIR verification error", t);
+                    }
+                });
     }
 
     private void loadSessionAndNavigate(long patientId) {
