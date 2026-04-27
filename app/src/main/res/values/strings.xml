@@ -24,11 +24,4 @@
     <string name="ward">Ward</string>
     <string name="doctor">Doctor</string>
     <string name="admission_date">Admission Date</string>
-
-    <string-array name="insurance_providers">
-        <item>No Insurance (Private)</item>
-        <item>MMI (Military Medical Insurance)</item>
-        <item>RSSB</item>
-        <item>EDEN CARE</item>
-    </string-array>
 </resources>

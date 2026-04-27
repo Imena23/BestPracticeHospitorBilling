@@ -61,52 +61,79 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Enter your credentials to access your billing information"
+                android:text="Enter your details to access your billing information"
                 android:textColor="@color/text_secondary"
                 android:textSize="14sp" />
 
-            <!-- Email Address -->
+            <!-- Full Name -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
                 android:layout_marginBottom="6dp"
-                android:text="Email Address"
+                android:text="Full Name"
                 android:textColor="@color/text_primary"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/et_email"
+                android:id="@+id/et_name"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:background="@drawable/input_background"
-                android:hint="e.g. john.doe@example.com"
-                android:inputType="textEmailAddress"
+                android:hint="e.g. John Doe"
+                android:inputType="textPersonName|textCapWords"
                 android:paddingStart="14dp"
                 android:paddingEnd="14dp"
                 android:textColor="@color/text_primary"
                 android:textColorHint="@color/text_hint"
                 android:textSize="15sp" />
 
-            <!-- Password -->
+            <!-- Date of Birth -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="6dp"
-                android:text="Password"
+                android:text="Date of Birth"
                 android:textColor="@color/text_primary"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/et_password"
+                android:id="@+id/et_dob"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:background="@drawable/input_background"
-                android:hint="••••••••"
-                android:inputType="textPassword"
+                android:hint="DD/MM/YYYY"
+                android:inputType="date"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_hint"
+                android:textSize="15sp"
+                android:focusable="false"
+                android:clickable="true" />
+
+            <!-- PIN -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="6dp"
+                android:text="4-Digit PIN"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_pin"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/input_background"
+                android:hint="Enter your PIN"
+                android:inputType="numberPassword"
+                android:maxLength="4"
                 android:paddingStart="14dp"
                 android:paddingEnd="14dp"
                 android:textColor="@color/text_primary"
@@ -129,7 +156,7 @@
                 android:id="@+id/btn_login"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 android:background="@drawable/btn_primary"
                 android:text="Access My Bills"
                 android:textColor="@color/white"
@@ -141,9 +168,37 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:text="Having trouble? Contact the hospital reception."
+                android:text="Demo: John Doe PIN 1234 · Jane Smith PIN 5678"
                 android:textColor="@color/text_hint"
                 android:textSize="12sp" />
+
+            <!-- Register link -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Don't have an account? "
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_goto_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Register"
+                    android:textColor="@color/primary_blue"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
