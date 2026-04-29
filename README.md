@@ -235,12 +235,9 @@ app/src/main/
 - **Architecture**: Fragment-based with Bottom Navigation
 - **Storage**: SharedPreferences for session management
 - **UI Framework**: Material Design Components (MDC) 1.13.0
-  - TextInputLayout with outlined style and icons
-  - MaterialButton with elevation and ripple effects
   - BottomNavigationView for tab navigation
-  - Snackbar for user feedback
   - Material themes and color system
-  - Password toggle for secure inputs
+  - Material-styled components and interactions
 - **Healthcare Interoperability**: HL7 FHIR R4
   - FHIR Patient resource for demographics
   - FHIR Claim resource for billing data
