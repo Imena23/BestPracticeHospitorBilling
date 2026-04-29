@@ -9,6 +9,7 @@ A modern Android application for hospital patient billing management with integr
 - **Persistent Login**: Auto-login on app restart using SharedPreferences
 - **Secure Authentication**: PIN-based login with validation
 - **FHIR Synchronization**: Patient data synced to hospital FHIR server on registration
+- **Material Design Inputs**: Outlined text fields with icons and password toggle
 
 ### 💳 Payment Systems
 
@@ -35,6 +36,7 @@ A modern Android application for hospital patient billing management with integr
 - **QR Code Generation**: Generate QR codes for cashier payments
 - **Profile Management**: View patient information and medical details
 - **FHIR Integration**: Bills can be exported as FHIR Claim resources
+- **Real-time Sync**: Snackbar notifications for hospital system synchronization
 
 ### 💰 Currency Support
 - All amounts displayed in **RWF (Rwandan Franc)**
@@ -310,6 +312,32 @@ Visit the HAPI FHIR server to view synced patient data:
 https://hapi.fhir.org/resource?serverId=home_r4&pretty=true&resource=Patient
 
 For detailed FHIR documentation, see **[FHIR_INTEGRATION.md](FHIR_INTEGRATION.md)**
+
+## 🎨 Material Design Components
+
+This app showcases modern Material Design Components:
+
+### Input Fields
+- **TextInputLayout**: Outlined style with floating labels
+- **Icons**: Start icons for visual context (calendar, lock, etc.)
+- **Password Toggle**: Eye icon to show/hide PIN
+- **Helper Text**: Contextual hints below fields
+- **Error States**: Red error messages with validation
+
+### Buttons
+- **MaterialButton**: Elevated primary buttons with ripple effects
+- **Outlined Buttons**: Secondary actions with stroke borders
+- **Corner Radius**: Rounded corners (8dp) for modern look
+- **State Animations**: Smooth press and release animations
+
+### Feedback
+- **Snackbar**: Bottom notifications for sync status
+- **Material Colors**: Primary blue theme with accent colors
+- **Ripple Effects**: Touch feedback on all interactive elements
+
+### Navigation
+- **BottomNavigationView**: Tab-based navigation with icons
+- **Material Transitions**: Smooth fragment transitions
 
 ## 📄 License
 

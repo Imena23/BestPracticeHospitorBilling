@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background">
+    android:background="@color/md_background">
 
-    <!-- Blue Header -->
+    <!-- MDC-styled header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="@color/primary_blue"
+        android:background="@color/md_primary"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -24,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="MediPay"
-            android:textColor="@color/white"
+            android:textColor="@color/md_on_primary"
             android:textSize="28sp"
             android:textStyle="bold" />
 
@@ -33,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Patient Billing Portal"
-            android:textColor="#B3FFFFFF"
+            android:textColor="@color/md_primary_container"
             android:textSize="14sp" />
 
     </LinearLayout>
@@ -53,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Welcome"
-                android:textColor="@color/text_primary"
+                android:textColor="@color/md_on_surface"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -62,83 +63,69 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Enter your details to access your billing information"
-                android:textColor="@color/text_secondary"
+                android:textColor="@color/md_on_surface_variant"
                 android:textSize="14sp" />
 
-            <!-- Full Name -->
-            <TextView
-                android:layout_width="wrap_content"
+            <!-- Full Name — MDC OutlinedBox -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
-                android:layout_marginBottom="6dp"
-                android:text="Full Name"
-                android:textColor="@color/text_primary"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:hint="Full Name"
+                style="@style/App.TextInputLayout">
 
-            <EditText
-                android:id="@+id/et_name"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:background="@drawable/input_background"
-                android:hint="e.g. John Doe"
-                android:inputType="textPersonName|textCapWords"
-                android:paddingStart="14dp"
-                android:paddingEnd="14dp"
-                android:textColor="@color/text_primary"
-                android:textColorHint="@color/text_hint"
-                android:textSize="15sp" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName|textCapWords"
+                    android:textColor="@color/md_on_surface"
+                    android:textSize="15sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Date of Birth -->
-            <TextView
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="6dp"
-                android:text="Date of Birth"
-                android:textColor="@color/text_primary"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:hint="Date of Birth"
+                style="@style/App.TextInputLayout"
+                app:startIconDrawable="@android:drawable/ic_menu_my_calendar">
 
-            <EditText
-                android:id="@+id/et_dob"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:background="@drawable/input_background"
-                android:hint="DD/MM/YYYY"
-                android:inputType="date"
-                android:paddingStart="14dp"
-                android:paddingEnd="14dp"
-                android:textColor="@color/text_primary"
-                android:textColorHint="@color/text_hint"
-                android:textSize="15sp"
-                android:focusable="false"
-                android:clickable="true" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_dob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="DD/MM/YYYY"
+                    android:inputType="none"
+                    android:textColor="@color/md_on_surface"
+                    android:textSize="15sp"
+                    android:focusable="false"
+                    android:clickable="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- PIN -->
-            <TextView
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="6dp"
-                android:text="4-Digit PIN"
-                android:textColor="@color/text_primary"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:hint="4-Digit PIN"
+                style="@style/App.TextInputLayout"
+                app:endIconMode="password_toggle"
+                app:startIconDrawable="@android:drawable/ic_lock_lock">
 
-            <EditText
-                android:id="@+id/et_pin"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:background="@drawable/input_background"
-                android:hint="Enter your PIN"
-                android:inputType="numberPassword"
-                android:maxLength="4"
-                android:paddingStart="14dp"
-                android:paddingEnd="14dp"
-                android:textColor="@color/text_primary"
-                android:textColorHint="@color/text_hint"
-                android:textSize="15sp" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_pin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberPassword"
+                    android:maxLength="4"
+                    android:textColor="@color/md_on_surface"
+                    android:textSize="15sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Error message -->
             <TextView
@@ -147,21 +134,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text=""
-                android:textColor="@color/accent_red"
+                android:textColor="@color/md_error"
                 android:textSize="13sp"
                 android:visibility="gone" />
 
-            <!-- Login Button -->
-            <Button
+            <!-- MDC Filled Button -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_login"
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
+                android:layout_height="56dp"
                 android:layout_marginTop="24dp"
-                android:background="@drawable/btn_primary"
                 android:text="Access My Bills"
-                android:textColor="@color/white"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                style="@style/App.Button.Primary" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -169,10 +154,9 @@
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:text="Demo: John Doe PIN 1234 · Jane Smith PIN 5678"
-                android:textColor="@color/text_hint"
+                android:textColor="@color/md_outline"
                 android:textSize="12sp" />
 
-            <!-- Register link -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -184,19 +168,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Don't have an account? "
-                    android:textColor="@color/text_secondary"
+                    android:textColor="@color/md_on_surface_variant"
                     android:textSize="14sp" />
 
-                <TextView
+                <!-- MDC Text Button style link -->
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/tv_goto_register"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Register"
-                    android:textColor="@color/primary_blue"
                     android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:clickable="true"
-                    android:focusable="true" />
+                    style="@style/App.Button.Text"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp" />
 
             </LinearLayout>
 
