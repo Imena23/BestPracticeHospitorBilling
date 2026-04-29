@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/md_background"
@@ -36,48 +37,48 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_prescriptions"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true">
+            android:clipToPadding="false"
+            android:padding="16dp"
+            tools:listitem="@layout/item_prescription"
+            android:visibility="gone" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+        <!-- Empty state view -->
+        <LinearLayout
+            android:id="@+id/layout_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@android:drawable/ic_menu_search"
+                app:tint="@color/md_on_surface_variant" />
+
+            <TextView
+                android:id="@+id/tv_empty_message"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:layout_marginTop="16dp"
+                android:text="No prescriptions found"
+                android:textColor="@color/md_on_surface_variant"
+                android:textSize="16sp" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/card_prescriptions"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="2dp"
-                    app:cardBackgroundColor="@color/md_surface">
-
-                    <LinearLayout
-                        android:id="@+id/prescription_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp" />
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- Empty state view -->
-                <TextView
-                    android:id="@+id/tv_empty_prescriptions"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="100dp"
-                    android:gravity="center"
-                    android:text="No prescriptions found"
-                    android:textColor="@color/md_on_surface_variant"
-                    android:textSize="16sp"
-                    android:visibility="gone" />
-
-            </LinearLayout>
-        </ScrollView>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_retry"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Retry" />
+        </LinearLayout>
 
         <!-- Loading view -->
         <ProgressBar
