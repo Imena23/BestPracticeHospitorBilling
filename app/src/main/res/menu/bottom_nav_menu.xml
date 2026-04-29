@@ -9,6 +9,10 @@
         android:icon="@android:drawable/ic_menu_agenda"
         android:title="@string/nav_bills" />
     <item
+        android:id="@+id/nav_prescriptions"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="@string/nav_prescriptions" />
+    <item
         android:id="@+id/nav_payments"
         android:icon="@android:drawable/ic_menu_send"
         android:title="@string/nav_payments" />
