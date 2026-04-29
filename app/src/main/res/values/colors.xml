@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Material Design 3 Color System -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Primary -->
+    <color name="md_primary">#1565C0</color>
+    <color name="md_on_primary">#FFFFFF</color>
+    <color name="md_primary_container">#D3E4FF</color>
+    <color name="md_on_primary_container">#001C3B</color>
+
+    <!-- Secondary -->
+    <color name="md_secondary">#2E7D32</color>
+    <color name="md_on_secondary">#FFFFFF</color>
+    <color name="md_secondary_container">#B7F0B1</color>
+    <color name="md_on_secondary_container">#002204</color>
+
+    <!-- Error -->
+    <color name="md_error">#C62828</color>
+    <color name="md_on_error">#FFFFFF</color>
+    <color name="md_error_container">#FFEBEE</color>
+
+    <!-- Surface / Background -->
+    <color name="md_background">#F5F7FA</color>
+    <color name="md_surface">#FFFFFF</color>
+    <color name="md_surface_variant">#E3EAF4</color>
+    <color name="md_on_surface">#212121</color>
+    <color name="md_on_surface_variant">#757575</color>
+    <color name="md_outline">#BDBDBD</color>
+
+    <!-- Legacy aliases (keep for backward compat) -->
     <color name="primary_blue">#1565C0</color>
     <color name="primary_blue_dark">#0D47A1</color>
     <color name="primary_blue_light">#E3F2FD</color>
