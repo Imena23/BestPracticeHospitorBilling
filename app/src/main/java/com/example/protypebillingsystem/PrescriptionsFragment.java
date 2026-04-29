@@ -5,16 +5,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.example.protypebillingsystem.adapters.PrescriptionAdapter;
 import com.example.protypebillingsystem.fhir.FhirClient;
 import com.example.protypebillingsystem.fhir.models.FhirBundle;
-import com.google.gson.JsonObject;
+import com.example.protypebillingsystem.fhir.models.MedicationRequest;
+import com.google.gson.Gson;
+import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,9 +26,11 @@ import retrofit2.Response;
 public class PrescriptionsFragment extends Fragment {
 
     private static final String TAG = "PrescriptionsFragment";
-    private LinearLayout container;
+    private RecyclerView recyclerView;
+    private PrescriptionAdapter adapter;
     private ProgressBar progressBar;
-    private TextView tvEmpty;
+    private View layoutEmpty;
+    private TextView tvEmptyMessage;
 
     @Nullable
     @Override
@@ -34,119 +39,107 @@ public class PrescriptionsFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_prescriptions, container, false);
         
-        this.container = view.findViewById(R.id.prescription_container);
-        this.progressBar = view.findViewById(R.id.pb_loading);
-        this.tvEmpty = view.findViewById(R.id.tv_empty_prescriptions);
+        recyclerView = view.findViewById(R.id.rv_prescriptions);
+        progressBar = view.findViewById(R.id.pb_loading);
+        layoutEmpty = view.findViewById(R.id.layout_empty);
+        tvEmptyMessage = view.findViewById(R.id.tv_empty_message);
+        view.findViewById(R.id.btn_retry).setOnClickListener(v -> fetchPrescriptions());
 
-        fetchPrescriptions(inflater);
+        setupRecyclerView();
+        fetchPrescriptions();
         
         return view;
     }
 
-    private void fetchPrescriptions(LayoutInflater inflater) {
+    private void setupRecyclerView() {
+        adapter = new PrescriptionAdapter();
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
+    }
+
+    private void fetchPrescriptions() {
         PatientSession session = PatientSession.getInstance();
-        // Use the patient's local ID or patientId string for FHIR search
-        // For HAPI FHIR public server, we search by the patientId we generated
         String searchId = session.patientId;
 
-        progressBar.setVisibility(View.VISIBLE);
-        tvEmpty.setVisibility(View.GONE);
-        container.removeAllViews();
+        showLoading();
 
         FhirClient.getInstance()
                 .getApiService()
                 .getPrescriptions(searchId)
                 .enqueue(new Callback<FhirBundle>() {
                     @Override
-                    public void onResponse(Call<FhirBundle> call, Response<FhirBundle> response) {
+                    public void onResponse(@NonNull Call<FhirBundle> call, @NonNull Response<FhirBundle> response) {
                         if (!isAdded()) return;
-                        progressBar.setVisibility(View.GONE);
-
+                        
                         if (response.isSuccessful() && response.body() != null) {
-                            displayPrescriptions(response.body(), inflater);
+                            processResponse(response.body());
                         } else {
-                            handleError("Failed to fetch prescriptions (Error " + response.code() + ")");
+                            showError("Failed to fetch prescriptions (Error " + response.code() + ")");
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<FhirBundle> call, Throwable t) {
+                    public void onFailure(@NonNull Call<FhirBundle> call, @NonNull Throwable t) {
                         if (!isAdded()) return;
-                        progressBar.setVisibility(View.GONE);
-                        handleError("Network error: Please check your connection");
+                        showError("Network error: Please check your connection");
                         Log.e(TAG, "API Failure", t);
                     }
                 });
     }
 
-    private void displayPrescriptions(FhirBundle bundle, LayoutInflater inflater) {
+    private void processResponse(FhirBundle bundle) {
         List<FhirBundle.Entry> entries = bundle.getEntry();
         
         if (entries == null || entries.isEmpty()) {
-            tvEmpty.setVisibility(View.VISIBLE);
+            showEmpty("No prescriptions found for your account.");
             return;
         }
 
+        List<MedicationRequest> medications = new ArrayList<>();
+        Gson gson = new Gson();
+
         for (FhirBundle.Entry entry : entries) {
-            JsonObject resource = entry.getResource();
-            if (resource == null) continue;
-
-            // Extract basic medication info from FHIR MedicationRequest resource
-            String medicationName = "Unknown Medication";
-            String dosage = "As directed";
-            String date = "N/A";
-
-            try {
-                if (resource.has("medicationCodeableConcept")) {
-                    medicationName = resource.getAsJsonObject("medicationCodeableConcept")
-                            .getAsJsonArray("coding").get(0).getAsJsonObject()
-                            .get("display").getAsString();
-                } else if (resource.has("medicationReference")) {
-                    medicationName = resource.getAsJsonObject("medicationReference")
-                            .get("display").getAsString();
+            if (entry.getResource() != null) {
+                try {
+                    // Convert JsonObject to our type-safe MedicationRequest model
+                    MedicationRequest med = gson.fromJson(entry.getResource(), MedicationRequest.class);
+                    if (med != null) {
+                        medications.add(med);
+                    }
+                } catch (Exception e) {
+                    Log.w(TAG, "Error parsing medication resource", e);
                 }
-
-                if (resource.has("authoredOn")) {
-                    date = resource.get("authoredOn").getAsString();
-                }
-
-                if (resource.has("dosageInstruction")) {
-                    dosage = resource.getAsJsonArray("dosageInstruction").get(0)
-                            .getAsJsonObject().get("text").getAsString();
-                }
-            } catch (Exception e) {
-                Log.w(TAG, "Error parsing resource", e);
             }
+        }
 
-            View row = inflater.inflate(R.layout.item_activity_row, container, false);
-            TextView tvTitle = row.findViewById(R.id.tv_activity_title);
-            TextView tvDate = row.findViewById(R.id.tv_activity_date);
-            TextView tvDosage = row.findViewById(R.id.tv_activity_amount);
-
-            if (tvTitle != null) tvTitle.setText(medicationName);
-            if (tvDate != null) tvDate.setText("Prescribed: " + date);
-            if (tvDosage != null) {
-                tvDosage.setText(dosage);
-                tvDosage.setTextColor(getResources().getColor(R.color.md_primary, null));
-                tvDosage.setTextSize(12);
-            }
-
-            container.addView(row);
-
-            // Add divider
-            View divider = new View(requireContext());
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, 1);
-            lp.setMargins(0, 10, 0, 10);
-            divider.setLayoutParams(lp);
-            divider.setBackgroundColor(getResources().getColor(R.color.divider, null));
-            container.addView(divider);
+        if (medications.isEmpty()) {
+            showEmpty("Could not parse prescription data.");
+        } else {
+            showContent(medications);
         }
     }
 
-    private void handleError(String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
-        tvEmpty.setText(message);
-        tvEmpty.setVisibility(View.VISIBLE);
+    private void showLoading() {
+        progressBar.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+        layoutEmpty.setVisibility(View.GONE);
+    }
+
+    private void showContent(List<MedicationRequest> medications) {
+        progressBar.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+        layoutEmpty.setVisibility(View.GONE);
+        adapter.submitList(medications);
+    }
+
+    private void showEmpty(String message) {
+        progressBar.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.GONE);
+        layoutEmpty.setVisibility(View.VISIBLE);
+        tvEmptyMessage.setText(message);
+    }
+
+    private void showError(String message) {
+        showEmpty(message);
     }
 }
