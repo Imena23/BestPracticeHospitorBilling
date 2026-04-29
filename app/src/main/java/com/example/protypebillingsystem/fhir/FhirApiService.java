@@ -39,4 +39,8 @@ public interface FhirApiService {
     
     @POST("Claim")
     Call<FhirClaim> createClaim(@Body FhirClaim claim);
+
+    // Prescription (MedicationRequest) endpoints
+    @GET("MedicationRequest")
+    Call<FhirBundle> getPrescriptions(@Query("patient") String patientId);
 }

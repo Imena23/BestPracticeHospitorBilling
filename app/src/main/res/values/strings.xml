@@ -9,6 +9,7 @@
     <string name="quick_actions">Quick Actions</string>
     <string name="nav_home">Home</string>
     <string name="nav_bills">Bills</string>
+    <string name="nav_prescriptions">Prescriptions</string>
     <string name="nav_payments">Payments</string>
     <string name="nav_profile">Profile</string>
     <string name="view_bills">View Bills</string>

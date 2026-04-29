@@ -1,5 +1,6 @@
 package com.example.protypebillingsystem.fhir.models;
 
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
@@ -23,9 +24,9 @@ public class FhirBundle {
     
     public static class Entry {
         @SerializedName("resource")
-        private Object resource;
+        private JsonObject resource;
         
-        public Object getResource() { return resource; }
+        public JsonObject getResource() { return resource; }
     }
     
     public int getTotal() { return total; }

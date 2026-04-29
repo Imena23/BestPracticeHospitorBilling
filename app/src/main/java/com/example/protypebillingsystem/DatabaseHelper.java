@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "medipay.db";
-    private static final int DB_VERSION = 2;
+    private static final int DB_VERSION = 4; // Bumped to 4 to force schema recreation
 
     // Patients table
     public static final String TABLE_PATIENTS = "patients";

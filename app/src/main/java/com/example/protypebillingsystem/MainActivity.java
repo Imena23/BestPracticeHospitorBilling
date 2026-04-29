@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
     private final Fragment[] fragments = {
         new HomeFragment(),
         new BillsFragment(),
+        new PrescriptionsFragment(),
         new PaymentsFragment(),
         new ProfileFragment()
     };
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private final int[] navIds = {
         R.id.nav_home,
         R.id.nav_bills,
+        R.id.nav_prescriptions,
         R.id.nav_payments,
         R.id.nav_profile
     };
