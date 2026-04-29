@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ussd_dialog_bg"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <!-- Enter PIN Label -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter PIN"
+        android:textColor="#1A1A1A"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:paddingBottom="16dp" />
+
+    <!-- PIN Input -->
+    <EditText
+        android:id="@+id/et_momo_pin"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="@android:color/white"
+        android:hint=""
+        android:inputType="numberPassword"
+        android:maxLength="5"
+        android:gravity="start|center_vertical"
+        android:textColor="#1A1A1A"
+        android:textColorHint="#BBBBBB"
+        android:textSize="16sp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="182 characters remaining"
+        android:textColor="#666666"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:paddingBottom="16dp" />
+
+    <!-- Buttons Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <Button
+            android:id="@+id/btn_pin_cancel"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/ussd_button_white"
+            android:text="Cancel"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:textAllCaps="false"
+            android:stateListAnimator="@null" />
+
+        <Button
+            android:id="@+id/btn_pin_reply"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="2"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/ussd_button_black"
+            android:text="Reply"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textAllCaps="false"
+            android:stateListAnimator="@null" />
+
+    </LinearLayout>
+
+</LinearLayout>

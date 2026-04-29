@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ussd_dialog_bg"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <!-- USSD Message -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Transaction to Approve a Cash Withdraw:"
+        android:textColor="#1A1A1A"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:paddingBottom="12dp" />
+
+    <!-- Transaction Option -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1) "
+        android:textColor="#1A1A1A"
+        android:textSize="15sp"
+        android:paddingBottom="4dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingBottom="16dp">
+
+        <TextView
+            android:id="@+id/tv_select_txn_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1713173868"
+            android:textColor="#1A1A1A"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            android:textColor="#1A1A1A"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_select_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10,000 RWF"
+            android:textColor="#1A1A1A"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <!-- Buttons Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btn_select_dismiss"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/ussd_button_white"
+            android:text="Dismiss"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:textAllCaps="false"
+            android:stateListAnimator="@null" />
+
+        <Button
+            android:id="@+id/btn_select_reply"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/ussd_button_black"
+            android:text="Reply"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textAllCaps="false"
+            android:stateListAnimator="@null" />
+
+    </LinearLayout>
+
+</LinearLayout>

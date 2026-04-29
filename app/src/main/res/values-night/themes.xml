@@ -1,5 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
     <style name="Base.Theme.ProtypeBillingSystem" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Dark theme inherits Material3 DayNight defaults automatically -->
+        <!-- Customize your dark theme here. -->
+        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
 </resources>

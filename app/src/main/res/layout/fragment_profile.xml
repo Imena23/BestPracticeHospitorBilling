@@ -145,5 +145,19 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
+        <!-- Reset Demo Bills Button (for testing) -->
+        <Button
+            android:id="@+id/btn_reset_bills"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/btn_primary"
+            android:text="Reset Demo Bills (Testing)"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
     </LinearLayout>
 </ScrollView>

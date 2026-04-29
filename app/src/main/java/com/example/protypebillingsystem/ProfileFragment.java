@@ -37,9 +37,39 @@ public class ProfileFragment extends Fragment {
         setProfileRow(view.findViewById(R.id.row_blood),     "Blood Type",     s.bloodType);
 
         view.findViewById(R.id.btn_logout).setOnClickListener(v -> {
+            // Clear session
+            android.content.SharedPreferences prefs = requireContext()
+                    .getSharedPreferences("MediPayPrefs", android.content.Context.MODE_PRIVATE);
+            prefs.edit()
+                    .putBoolean("isLoggedIn", false)
+                    .remove("patientId")
+                    .apply();
+
             PatientSession.getInstance().clear();
-            startActivity(new Intent(requireContext(), LoginActivity.class));
+            startActivity(new Intent(requireContext(), RegisterActivity.class));
             requireActivity().finish();
+        });
+
+        view.findViewById(R.id.btn_reset_bills).setOnClickListener(v -> {
+            DatabaseHelper db = new DatabaseHelper(requireContext());
+            boolean success = db.resetBillsToUnpaid(s.id);
+            db.close();
+
+            if (success) {
+                // Refresh session amounts
+                DatabaseHelper dbRefresh = new DatabaseHelper(requireContext());
+                s.paidAmount = dbRefresh.getTotalPaid(s.id);
+                s.unpaidAmount = dbRefresh.getTotalUnpaid(s.id);
+                dbRefresh.close();
+
+                android.widget.Toast.makeText(requireContext(),
+                        "All bills reset to unpaid! Go to Payments to test again.",
+                        android.widget.Toast.LENGTH_LONG).show();
+            } else {
+                android.widget.Toast.makeText(requireContext(),
+                        "No bills to reset",
+                        android.widget.Toast.LENGTH_SHORT).show();
+            }
         });
 
         return view;

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/mtn_dialog_bg"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:paddingStart="28dp"
+    android:paddingEnd="28dp"
+    android:paddingTop="32dp"
+    android:paddingBottom="28dp">
+
+    <!-- Success/Failure Icon -->
+    <FrameLayout
+        android:id="@+id/icon_container"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/mtn_success_circle">
+        <TextView
+            android:id="@+id/tv_result_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="✓"
+            android:textColor="#2E7D32"
+            android:textSize="42sp"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tv_result_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Payment Successful"
+        android:textColor="#1A1A1A"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+    <!-- Message -->
+    <TextView
+        android:id="@+id/tv_result_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Your payment has been processed successfully"
+        android:textColor="#888888"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:lineSpacingExtra="2dp" />
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/mtn_divider" />
+
+    <!-- Transaction Details -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Amount Paid -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Amount Paid"
+                android:textColor="#888888"
+                android:textSize="13sp" />
+            <TextView
+                android:id="@+id/tv_result_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RWF 0"
+                android:textColor="#1A1A1A"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Phone Number -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Phone Number"
+                android:textColor="#888888"
+                android:textSize="13sp" />
+            <TextView
+                android:id="@+id/tv_result_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+250 7XX XXX XXX"
+                android:textColor="#1A1A1A"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Transaction ID -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Transaction ID"
+                android:textColor="#888888"
+                android:textSize="13sp" />
+            <TextView
+                android:id="@+id/tv_result_txn_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MTN-XXXXXXXXXX"
+                android:textColor="#1A1A1A"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Date & Time -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Date &amp; Time"
+                android:textColor="#888888"
+                android:textSize="13sp" />
+            <TextView
+                android:id="@+id/tv_result_datetime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apr 27, 2026 10:30 AM"
+                android:textColor="#1A1A1A"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Done Button -->
+    <Button
+        android:id="@+id/btn_result_done"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/mtn_btn_yellow"
+        android:text="Done"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:stateListAnimator="@null" />
+
+</LinearLayout>
