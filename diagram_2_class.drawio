@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+  <root>
+    <mxCell id="0" /><mxCell id="1" parent="0" />
+
+    <!-- Patient Class -->
+    <mxCell id="2" value="Patient" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="40" y="40" width="220" height="200" as="geometry" />
+    </mxCell>
+    <mxCell id="2a" value="- id: long&#xa;- name: String&#xa;- dob: String&#xa;- patientId: String&#xa;- ward: String&#xa;- doctor: String&#xa;- admissionDate: String&#xa;- bloodType: String&#xa;- pin: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="2">
+      <mxGeometry y="30" width="220" height="120" as="geometry" />
+    </mxCell>
+    <mxCell id="2b" value="+ register(): long&#xa;+ login(): boolean&#xa;+ getById(): Patient" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="2">
+      <mxGeometry y="150" width="220" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- Staff Class -->
+    <mxCell id="3" value="Staff" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+      <mxGeometry x="320" y="40" width="220" height="200" as="geometry" />
+    </mxCell>
+    <mxCell id="3a" value="- id: long&#xa;- name: String&#xa;- role: String&#xa;- username: String&#xa;- password: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="3">
+      <mxGeometry y="30" width="220" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="3b" value="+ login(): boolean&#xa;+ create(): long&#xa;+ delete(): boolean&#xa;+ getAll(): List" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="3">
+      <mxGeometry y="110" width="220" height="90" as="geometry" />
+    </mxCell>
+
+    <!-- Bill Class -->
+    <mxCell id="4" value="Bill" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+      <mxGeometry x="600" y="40" width="220" height="210" as="geometry" />
+    </mxCell>
+    <mxCell id="4a" value="- id: long&#xa;- billId: String&#xa;- patientRef: long&#xa;- item: String&#xa;- amount: double&#xa;- date: String&#xa;- status: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="4">
+      <mxGeometry y="30" width="220" height="110" as="geometry" />
+    </mxCell>
+    <mxCell id="4b" value="+ getForPatient(): List&#xa;+ updateStatus(): boolean&#xa;+ getTotalPaid(): double&#xa;+ getTotalUnpaid(): double" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="4">
+      <mxGeometry y="140" width="220" height="70" as="geometry" />
+    </mxCell>
+
+    <!-- Prescription Class -->
+    <mxCell id="5" value="Prescription" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+      <mxGeometry x="40" y="320" width="220" height="210" as="geometry" />
+    </mxCell>
+    <mxCell id="5a" value="- id: long&#xa;- patientRef: long&#xa;- doctorRef: long&#xa;- medicine: String&#xa;- dosage: String&#xa;- notes: String&#xa;- date: String&#xa;- status: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="5">
+      <mxGeometry y="30" width="220" height="120" as="geometry" />
+    </mxCell>
+    <mxCell id="5b" value="+ add(): long&#xa;+ getForPatient(): List&#xa;+ getPending(): List&#xa;+ dispense(): boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="5">
+      <mxGeometry y="150" width="220" height="60" as="geometry" />
+    </mxCell>
+
+    <!-- LabOrder Class -->
+    <mxCell id="6" value="LabOrder" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+      <mxGeometry x="320" y="320" width="220" height="220" as="geometry" />
+    </mxCell>
+    <mxCell id="6a" value="- id: long&#xa;- patientRef: long&#xa;- doctorRef: long&#xa;- testName: String&#xa;- notes: String&#xa;- date: String&#xa;- status: String&#xa;- result: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="6">
+      <mxGeometry y="30" width="220" height="120" as="geometry" />
+    </mxCell>
+    <mxCell id="6b" value="+ add(): long&#xa;+ getPending(): List&#xa;+ getForPatient(): List&#xa;+ complete(): boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="6">
+      <mxGeometry y="150" width="220" height="70" as="geometry" />
+    </mxCell>
+
+    <!-- NurseTask Class -->
+    <mxCell id="7" value="NurseTask" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+      <mxGeometry x="600" y="320" width="220" height="220" as="geometry" />
+    </mxCell>
+    <mxCell id="7a" value="- id: long&#xa;- patientRef: long&#xa;- doctorRef: long&#xa;- service: String&#xa;- notes: String&#xa;- date: String&#xa;- status: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7">
+      <mxGeometry y="30" width="220" height="110" as="geometry" />
+    </mxCell>
+    <mxCell id="7b" value="+ add(): long&#xa;+ getPending(): List&#xa;+ getForPatient(): List&#xa;+ complete(): boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="7">
+      <mxGeometry y="140" width="220" height="80" as="geometry" />
+    </mxCell>
+
+    <!-- DatabaseHelper Class -->
+    <mxCell id="8" value="DatabaseHelper" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+      <mxGeometry x="880" y="40" width="240" height="500" as="geometry" />
+    </mxCell>
+    <mxCell id="8a" value="- DB_NAME: String&#xa;- DB_VERSION: int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="8">
+      <mxGeometry y="30" width="240" height="40" as="geometry" />
+    </mxCell>
+    <mxCell id="8b" value="+ onCreate()&#xa;+ onUpgrade()&#xa;+ findPatient()&#xa;+ registerPatient()&#xa;+ getPatientById()&#xa;+ getAllPatients()&#xa;+ loginStaff()&#xa;+ createStaff()&#xa;+ deleteStaff()&#xa;+ getAllStaff()&#xa;+ addPrescription()&#xa;+ getPendingPrescriptions()&#xa;+ dispensePrescription()&#xa;+ addLabOrder()&#xa;+ getPendingLabOrders()&#xa;+ completeLabOrder()&#xa;+ addNurseTask()&#xa;+ getPendingNurseTasks()&#xa;+ completeNurseTask()&#xa;+ getBillsForPatient()&#xa;+ updateBillStatus()&#xa;+ getTotalPaid()&#xa;+ getTotalUnpaid()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="8">
+      <mxGeometry y="70" width="240" height="430" as="geometry" />
+    </mxCell>
+
+    <!-- PatientSession Class -->
+    <mxCell id="9" value="PatientSession" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="40" y="620" width="220" height="180" as="geometry" />
+    </mxCell>
+    <mxCell id="9a" value="- instance: PatientSession&#xa;+ id: long&#xa;+ name: String&#xa;+ patientId: String&#xa;+ totalBill: double&#xa;+ paidAmount: double&#xa;+ unpaidAmount: double" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="9">
+      <mxGeometry y="30" width="220" height="100" as="geometry" />
+    </mxCell>
+    <mxCell id="9b" value="+ getInstance(): PatientSession&#xa;+ clear()&#xa;+ getInitials(): String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="9">
+      <mxGeometry y="130" width="220" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- StaffSession Class -->
+    <mxCell id="10" value="StaffSession" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+      <mxGeometry x="320" y="620" width="220" height="160" as="geometry" />
+    </mxCell>
+    <mxCell id="10a" value="- instance: StaffSession&#xa;+ id: long&#xa;+ name: String&#xa;+ role: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="10">
+      <mxGeometry y="30" width="220" height="70" as="geometry" />
+    </mxCell>
+    <mxCell id="10b" value="+ getInstance(): StaffSession&#xa;+ set(): void&#xa;+ clear(): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="10">
+      <mxGeometry y="100" width="220" height="60" as="geometry" />
+    </mxCell>
+
+    <!-- RELATIONSHIPS -->
+    <!-- Patient has many Bills -->
+    <mxCell id="300" value="1" style="edgeStyle=orthogonalEdgeStyle;endArrow=ERmany;startArrow=ERone;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" source="2" target="4" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- Patient has many Prescriptions -->
+    <mxCell id="301" value="1" style="edgeStyle=orthogonalEdgeStyle;endArrow=ERmany;startArrow=ERone;exitX=0;exitY=1;entryX=0;entryY=0;" edge="1" source="2" target="5" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- Patient has many LabOrders -->
+    <mxCell id="302" value="1" style="edgeStyle=orthogonalEdgeStyle;endArrow=ERmany;startArrow=ERone;" edge="1" source="2" target="6" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- Patient has many NurseTasks -->
+    <mxCell id="303" value="1" style="edgeStyle=orthogonalEdgeStyle;endArrow=ERmany;startArrow=ERone;" edge="1" source="2" target="7" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- Staff creates Prescriptions -->
+    <mxCell id="304" value="creates" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;" edge="1" source="3" target="5" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- Staff creates LabOrders -->
+    <mxCell id="305" value="creates" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;" edge="1" source="3" target="6" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- Staff creates NurseTasks -->
+    <mxCell id="306" value="creates" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;" edge="1" source="3" target="7" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- Prescription generates Bill -->
+    <mxCell id="307" value="generates" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;" edge="1" source="5" target="4" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- LabOrder generates Bill -->
+    <mxCell id="308" value="generates" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;" edge="1" source="6" target="4" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- NurseTask generates Bill -->
+    <mxCell id="309" value="generates" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;" edge="1" source="7" target="4" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- DatabaseHelper manages all -->
+    <mxCell id="310" value="manages" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;" edge="1" source="8" target="2" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="311" value="manages" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;" edge="1" source="8" target="3" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="312" value="manages" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;" edge="1" source="8" target="4" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="313" value="manages" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;" edge="1" source="8" target="5" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="314" value="manages" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;" edge="1" source="8" target="6" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="315" value="manages" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;" edge="1" source="8" target="7" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+  </root>
+</mxGraphModel>

@@ -14,12 +14,27 @@ import java.util.Locale;
 
 public class HomeFragment extends Fragment {
 
+    private View rootView;
+    private LayoutInflater rootInflater;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        rootInflater = inflater;
+        bindHome(rootView, inflater);
+        return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (rootView != null) bindHome(rootView, rootInflater);
+    }
+
+    private void bindHome(View view, LayoutInflater inflater) {
         PatientSession s = PatientSession.getInstance();
 
         TextView tvName = view.findViewById(R.id.tv_patient_name);
@@ -38,15 +53,14 @@ public class HomeFragment extends Fragment {
         db.close();
 
         TextView tvTotal = view.findViewById(R.id.tv_bill_total);
-        if (tvTotal != null) tvTotal.setText(String.format(Locale.getDefault(), "RWF %,.0f", s.unpaidAmount * 1300));
+        if (tvTotal != null) tvTotal.setText(String.format(Locale.getDefault(), "RWF %,.0f", s.unpaidAmount));
 
         setupActivityRows(view, inflater);
 
+        // Navigation indices: 0:Home, 1:Bills, 2:Prescriptions, 3:Payments, 4:Profile
         view.findViewById(R.id.btn_view_bill).setOnClickListener(v -> navigateTo(1));
         view.findViewById(R.id.action_view_bills).setOnClickListener(v -> navigateTo(1));
-        view.findViewById(R.id.action_payment_history).setOnClickListener(v -> navigateTo(2));
-
-        return view;
+        view.findViewById(R.id.action_payment_history).setOnClickListener(v -> navigateTo(3));
     }
 
     private void setupActivityRows(View view, LayoutInflater inflater) {
@@ -83,7 +97,7 @@ public class HomeFragment extends Fragment {
                 if (tvTitle != null) tvTitle.setText(item);
                 if (tvDate != null) tvDate.setText(date);
                 if (tvAmount != null) {
-                    tvAmount.setText(String.format(Locale.getDefault(), "RWF %,.0f", amount * 1300));
+                    tvAmount.setText(String.format(Locale.getDefault(), "RWF %,.0f", amount));
                     boolean isPaid = "paid".equalsIgnoreCase(status);
                     tvAmount.setTextColor(getResources().getColor(
                             isPaid ? R.color.accent_green : R.color.accent_red, null));
@@ -95,7 +109,6 @@ public class HomeFragment extends Fragment {
         db.close();
 
         if (first) {
-            // No bills — show empty state
             TextView empty = new TextView(requireContext());
             empty.setText("No recent activity");
             empty.setTextColor(getResources().getColor(R.color.text_hint, null));

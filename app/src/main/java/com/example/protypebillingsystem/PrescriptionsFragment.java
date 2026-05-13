@@ -1,145 +1,101 @@
 package com.example.protypebillingsystem;
 
+import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import com.example.protypebillingsystem.adapters.PrescriptionAdapter;
-import com.example.protypebillingsystem.fhir.FhirClient;
-import com.example.protypebillingsystem.fhir.models.FhirBundle;
-import com.example.protypebillingsystem.fhir.models.MedicationRequest;
-import com.google.gson.Gson;
-import java.util.ArrayList;
-import java.util.List;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.google.android.material.chip.Chip;
 
 public class PrescriptionsFragment extends Fragment {
 
-    private static final String TAG = "PrescriptionsFragment";
-    private RecyclerView recyclerView;
-    private PrescriptionAdapter adapter;
-    private ProgressBar progressBar;
-    private View layoutEmpty;
-    private TextView tvEmptyMessage;
+    private View rootView;
+    private LayoutInflater rootInflater;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_prescriptions, container, false);
-        
-        recyclerView = view.findViewById(R.id.rv_prescriptions);
-        progressBar = view.findViewById(R.id.pb_loading);
-        layoutEmpty = view.findViewById(R.id.layout_empty);
-        tvEmptyMessage = view.findViewById(R.id.tv_empty_message);
-        view.findViewById(R.id.btn_retry).setOnClickListener(v -> fetchPrescriptions());
-
-        setupRecyclerView();
-        fetchPrescriptions();
-        
-        return view;
+        rootView = inflater.inflate(R.layout.fragment_prescriptions, container, false);
+        rootInflater = inflater;
+        loadPrescriptions(rootView, inflater);
+        return rootView;
     }
 
-    private void setupRecyclerView() {
-        adapter = new PrescriptionAdapter();
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapter);
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (rootView != null) loadPrescriptions(rootView, rootInflater);
     }
 
-    private void fetchPrescriptions() {
-        PatientSession session = PatientSession.getInstance();
-        String searchId = session.patientId;
+    private void loadPrescriptions(View view, LayoutInflater inflater) {
+        PatientSession s = PatientSession.getInstance();
+        DatabaseHelper db = new DatabaseHelper(requireContext());
 
-        showLoading();
+        LinearLayout container = view.findViewById(R.id.prescriptions_container);
+        TextView tvEmpty = view.findViewById(R.id.tv_empty_message);
+        View layoutEmpty = view.findViewById(R.id.layout_empty);
 
-        FhirClient.getInstance()
-                .getApiService()
-                .getPrescriptions(searchId)
-                .enqueue(new Callback<FhirBundle>() {
-                    @Override
-                    public void onResponse(@NonNull Call<FhirBundle> call, @NonNull Response<FhirBundle> response) {
-                        if (!isAdded()) return;
-                        
-                        if (response.isSuccessful() && response.body() != null) {
-                            processResponse(response.body());
-                        } else {
-                            showError("Failed to fetch prescriptions (Error " + response.code() + ")");
-                        }
-                    }
+        if (container == null) return;
+        container.removeAllViews();
 
-                    @Override
-                    public void onFailure(@NonNull Call<FhirBundle> call, @NonNull Throwable t) {
-                        if (!isAdded()) return;
-                        showError("Network error: Please check your connection");
-                        Log.e(TAG, "API Failure", t);
-                    }
-                });
-    }
+        Cursor cursor = db.getPrescriptionsForPatient(s.id);
+        int count = 0;
 
-    private void processResponse(FhirBundle bundle) {
-        List<FhirBundle.Entry> entries = bundle.getEntry();
-        
-        if (entries == null || entries.isEmpty()) {
-            showEmpty("No prescriptions found for your account.");
-            return;
-        }
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                count++;
+                String medicine = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_PRESC_MEDICINE));
+                String dosage   = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_PRESC_DOSAGE));
+                String notes    = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_PRESC_NOTES));
+                String date     = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_PRESC_DATE));
+                String status   = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_PRESC_STATUS));
 
-        List<MedicationRequest> medications = new ArrayList<>();
-        Gson gson = new Gson();
+                View row = inflater.inflate(R.layout.item_prescription_local, container, false);
 
-        for (FhirBundle.Entry entry : entries) {
-            if (entry.getResource() != null) {
-                try {
-                    // Convert JsonObject to our type-safe MedicationRequest model
-                    MedicationRequest med = gson.fromJson(entry.getResource(), MedicationRequest.class);
-                    if (med != null) {
-                        medications.add(med);
-                    }
-                } catch (Exception e) {
-                    Log.w(TAG, "Error parsing medication resource", e);
+                setText(row, R.id.tv_medicine, medicine);
+                setText(row, R.id.tv_dosage, dosage);
+                setText(row, R.id.tv_notes, (notes != null && !notes.isEmpty()) ? notes : "No additional notes");
+                setText(row, R.id.tv_date, "Prescribed: " + date);
+
+                Chip chip = row.findViewById(R.id.chip_status);
+                if (chip != null) {
+                    boolean dispensed = "dispensed".equalsIgnoreCase(status);
+                    chip.setText(dispensed ? "Dispensed" : "Pending");
+                    chip.setTextColor(getResources().getColor(
+                            dispensed ? R.color.accent_green : R.color.pending_yellow, null));
+                    chip.setChipBackgroundColorResource(
+                            dispensed ? R.color.accent_green_light : R.color.pending_yellow_light);
                 }
+
+                container.addView(row);
+
+                // divider
+                View divider = new View(requireContext());
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT, 1);
+                lp.setMargins(0, 12, 0, 12);
+                divider.setLayoutParams(lp);
+                divider.setBackgroundColor(getResources().getColor(R.color.divider, null));
+                container.addView(divider);
             }
+            cursor.close();
         }
+        db.close();
 
-        if (medications.isEmpty()) {
-            showEmpty("Could not parse prescription data.");
-        } else {
-            showContent(medications);
-        }
+        if (layoutEmpty != null) layoutEmpty.setVisibility(count == 0 ? View.VISIBLE : View.GONE);
+        if (tvEmpty != null && count == 0) tvEmpty.setText("No prescriptions from your doctor yet.");
+        container.setVisibility(count > 0 ? View.VISIBLE : View.GONE);
     }
 
-    private void showLoading() {
-        progressBar.setVisibility(View.VISIBLE);
-        recyclerView.setVisibility(View.GONE);
-        layoutEmpty.setVisibility(View.GONE);
-    }
-
-    private void showContent(List<MedicationRequest> medications) {
-        progressBar.setVisibility(View.GONE);
-        recyclerView.setVisibility(View.VISIBLE);
-        layoutEmpty.setVisibility(View.GONE);
-        adapter.submitList(medications);
-    }
-
-    private void showEmpty(String message) {
-        progressBar.setVisibility(View.GONE);
-        recyclerView.setVisibility(View.GONE);
-        layoutEmpty.setVisibility(View.VISIBLE);
-        tvEmptyMessage.setText(message);
-    }
-
-    private void showError(String message) {
-        showEmpty(message);
+    private void setText(View parent, int id, String text) {
+        TextView tv = parent.findViewById(id);
+        if (tv != null) tv.setText(text);
     }
 }

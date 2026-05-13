@@ -2,44 +2,65 @@ package com.example.protypebillingsystem;
 
 import android.app.Dialog;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.chip.Chip;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 import java.util.Locale;
 
 public class BillsFragment extends Fragment {
+
+    private View rootView;
+    private LayoutInflater rootInflater;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_bills, container, false);
-        loadBills(view, inflater);
-        view.findViewById(R.id.btn_show_qr).setOnClickListener(v -> showQrDialog());
-        return view;
+        rootView = inflater.inflate(R.layout.fragment_bills, container, false);
+        rootInflater = inflater;
+        loadBills(rootView, inflater);
+        rootView.findViewById(R.id.btn_show_qr).setOnClickListener(v -> showQrDialog());
+        return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (rootView != null) loadBills(rootView, rootInflater);
     }
 
     private void loadBills(View view, LayoutInflater inflater) {
         PatientSession s = PatientSession.getInstance();
         DatabaseHelper db = new DatabaseHelper(requireContext());
 
-        // Refresh paid/unpaid from DB
-        s.paidAmount = db.getTotalPaid(s.id);
+        // Refresh all totals from DB so staff-added charges appear immediately
+        s.paidAmount   = db.getTotalPaid(s.id);
         s.unpaidAmount = db.getTotalUnpaid(s.id);
+        s.totalBill    = s.paidAmount + s.unpaidAmount;
+
+        View btnShowQr = view.findViewById(R.id.btn_show_qr);
+        if (btnShowQr != null) btnShowQr.setVisibility(s.unpaidAmount > 0 ? View.VISIBLE : View.GONE);
 
         TextView tvTotal = view.findViewById(R.id.tv_total_charges);
-        if (tvTotal != null) tvTotal.setText(String.format(Locale.getDefault(), "RWF %,.0f", s.totalBill * 1300));
+        if (tvTotal != null) tvTotal.setText(String.format(Locale.getDefault(), "RWF %,.0f", s.totalBill));
 
         TextView tvPaid = view.findViewById(R.id.tv_amount_paid);
-        if (tvPaid != null) tvPaid.setText(String.format(Locale.getDefault(), "RWF %,.0f", s.paidAmount * 1300));
+        if (tvPaid != null) tvPaid.setText(String.format(Locale.getDefault(), "RWF %,.0f", s.paidAmount));
 
         LinearLayout billContainer = view.findViewById(R.id.bill_items_container);
         if (billContainer != null) {
@@ -60,7 +81,7 @@ public class BillsFragment extends Fragment {
 
                     if (tvName != null) tvName.setText(item);
                     if (tvDate != null) tvDate.setText(date);
-                    if (tvAmount != null) tvAmount.setText(String.format(Locale.getDefault(), "RWF %,.0f", amount * 1300));
+                    if (tvAmount != null) tvAmount.setText(String.format(Locale.getDefault(), "RWF %,.0f", amount));
 
                     boolean isPaid = "paid".equalsIgnoreCase(status);
                     if (chipStatus != null) {
@@ -83,11 +104,11 @@ public class BillsFragment extends Fragment {
                 }
                 cursor.close();
             }
-            db.close();
         }
+        db.close();
 
         TextView tvGrandTotal = view.findViewById(R.id.tv_bill_grand_total);
-        if (tvGrandTotal != null) tvGrandTotal.setText(String.format(Locale.getDefault(), "RWF %,.0f", s.unpaidAmount * 1300));
+        if (tvGrandTotal != null) tvGrandTotal.setText(String.format(Locale.getDefault(), "RWF %,.0f", s.unpaidAmount));
     }
 
     private void showQrDialog() {
@@ -99,10 +120,28 @@ public class BillsFragment extends Fragment {
             dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
             dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         }
+
+        ImageView ivQrCode = dialog.findViewById(R.id.iv_qr_code);
         TextView tvBillId = dialog.findViewById(R.id.tv_qr_bill_id);
         TextView tvTotal = dialog.findViewById(R.id.tv_qr_total);
-        if (tvBillId != null) tvBillId.setText("Bill ID: #" + s.billId);
-        if (tvTotal != null) tvTotal.setText(String.format(Locale.getDefault(), "Total Due: $%.2f", s.unpaidAmount));
+
+        // Fallback for Bill ID if missing (common in newly registered users)
+        String billId = (s.billId != null && !s.billId.isEmpty()) ? s.billId : "BILL-" + System.currentTimeMillis();
+        String qrData = "BILL_ID:" + billId + "|PATIENT:" + s.name + "|AMOUNT:" + s.unpaidAmount;
+        
+        try {
+            MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+            BitMatrix bitMatrix = multiFormatWriter.encode(qrData, BarcodeFormat.QR_CODE, 500, 500);
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+            if (ivQrCode != null) ivQrCode.setImageBitmap(bitmap);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+
+        if (tvBillId != null) tvBillId.setText("Bill ID: #" + billId);
+        if (tvTotal != null) tvTotal.setText(String.format(Locale.getDefault(), "Total Due: RWF %,.0f", s.unpaidAmount));
+
         dialog.findViewById(R.id.btn_close_qr).setOnClickListener(v -> dialog.dismiss());
         dialog.show();
     }

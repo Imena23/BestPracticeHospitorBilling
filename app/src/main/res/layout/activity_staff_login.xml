@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/md_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="@color/md_primary"
+        android:gravity="center"
+        android:orientation="vertical">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="🏥" android:textSize="40sp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Staff Portal" android:textColor="@color/md_on_primary"
+            android:textSize="24sp" android:textStyle="bold" android:layout_marginTop="6dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="MediPay Hospital System" android:textColor="@color/md_primary_container"
+            android:textSize="13sp"/>
+    </LinearLayout>
+
+    <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:padding="24dp">
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="Staff Login" android:textSize="22sp" android:textStyle="bold"
+                android:textColor="@color/md_on_surface"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="24dp" android:hint="Username"
+                style="@style/App.TextInputLayout">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_username" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:inputType="text"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="16dp" android:hint="Password"
+                style="@style/App.TextInputLayout"
+                app:endIconMode="password_toggle">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_password" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:inputType="textPassword"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView android:id="@+id/tv_error" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:layout_marginTop="8dp"
+                android:textColor="@color/md_error" android:textSize="13sp"
+                android:visibility="gone"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_login" android:layout_width="match_parent"
+                android:layout_height="56dp" android:layout_marginTop="24dp"
+                android:text="Login" android:textSize="16sp"
+                style="@style/App.Button.Primary"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tv_back_patient" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:layout_gravity="center"
+                android:layout_marginTop="16dp" android:text="← Back to Patient Login"
+                style="@style/App.Button.Text"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

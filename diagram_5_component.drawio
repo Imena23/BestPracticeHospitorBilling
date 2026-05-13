@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+  <root>
+    <mxCell id="0" /><mxCell id="1" parent="0" />
+
+    <!-- TITLE -->
+    <mxCell id="99" value="Polyfam Hospital Billing System — Component Diagram" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=16;" vertex="1" parent="1">
+      <mxGeometry x="200" y="10" width="700" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- PRESENTATION LAYER -->
+    <mxCell id="2" value="Presentation Layer" style="swimlane;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;startSize=30;" vertex="1" parent="1">
+      <mxGeometry x="30" y="60" width="1080" height="200" as="geometry" />
+    </mxCell>
+
+    <mxCell id="3" value="&lt;&lt;component&gt;&gt;&#xa;LoginActivity" style="shape=component;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="2">
+      <mxGeometry x="20" y="60" width="150" height="60" as="geometry" />
+    </mxCell>
+
+    <mxCell id="4" value="&lt;&lt;component&gt;&gt;&#xa;RegisterActivity" style="shape=component;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="2">
+      <mxGeometry x="190" y="60" width="150" height="60" as="geometry" />
+    </mxCell>
+
+    <mxCell id="5" value="&lt;&lt;component&gt;&gt;&#xa;MainActivity&#xa;(HomeFragment&#xa;BillsFragment&#xa;PrescriptionsFragment&#xa;PaymentsFragment&#xa;ProfileFragment)" style="shape=component;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="2">
+      <mxGeometry x="360" y="40" width="160" height="130" as="geometry" />
+    </mxCell>
+
+    <mxCell id="6" value="&lt;&lt;component&gt;&gt;&#xa;AdminActivity" style="shape=component;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="2">
+      <mxGeometry x="540" y="60" width="150" height="60" as="geometry" />
+    </mxCell>
+
+    <mxCell id="7" value="&lt;&lt;component&gt;&gt;&#xa;DoctorActivity" style="shape=component;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="2">
+      <mxGeometry x="700" y="60" width="150" height="60" as="geometry" />
+    </mxCell>
+
+    <mxCell id="8" value="&lt;&lt;component&gt;&gt;&#xa;PharmacistActivity&#xa;LabActivity&#xa;NurseActivity" style="shape=component;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="2">
+      <mxGeometry x="870" y="50" width="160" height="80" as="geometry" />
+    </mxCell>
+
+    <!-- BUSINESS LOGIC LAYER -->
+    <mxCell id="9" value="Business Logic Layer" style="swimlane;fontStyle=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;startSize=30;" vertex="1" parent="1">
+      <mxGeometry x="30" y="290" width="1080" height="160" as="geometry" />
+    </mxCell>
+
+    <mxCell id="10" value="&lt;&lt;component&gt;&gt;&#xa;PatientSession&#xa;(Singleton)" style="shape=component;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="9">
+      <mxGeometry x="60" y="50" width="160" height="70" as="geometry" />
+    </mxCell>
+
+    <mxCell id="11" value="&lt;&lt;component&gt;&gt;&#xa;StaffSession&#xa;(Singleton)" style="shape=component;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="9">
+      <mxGeometry x="260" y="50" width="160" height="70" as="geometry" />
+    </mxCell>
+
+    <mxCell id="12" value="&lt;&lt;component&gt;&gt;&#xa;MtnMomoDialog&#xa;(Payment Flow)" style="shape=component;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="9">
+      <mxGeometry x="460" y="50" width="160" height="70" as="geometry" />
+    </mxCell>
+
+    <mxCell id="13" value="&lt;&lt;component&gt;&gt;&#xa;CardPaymentDialog&#xa;(Payment Flow)" style="shape=component;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="9">
+      <mxGeometry x="660" y="50" width="160" height="70" as="geometry" />
+    </mxCell>
+
+    <mxCell id="14" value="&lt;&lt;component&gt;&gt;&#xa;QR Code Generator&#xa;(ZXing Library)" style="shape=component;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="9">
+      <mxGeometry x="860" y="50" width="160" height="70" as="geometry" />
+    </mxCell>
+
+    <!-- DATA LAYER -->
+    <mxCell id="15" value="Data Layer" style="swimlane;fontStyle=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=13;startSize=30;" vertex="1" parent="1">
+      <mxGeometry x="30" y="480" width="1080" height="160" as="geometry" />
+    </mxCell>
+
+    <mxCell id="16" value="&lt;&lt;component&gt;&gt;&#xa;DatabaseHelper&#xa;(SQLiteOpenHelper)" style="shape=component;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="15">
+      <mxGeometry x="200" y="50" width="200" height="70" as="geometry" />
+    </mxCell>
+
+    <mxCell id="17" value="&lt;&lt;database&gt;&gt;&#xa;SQLite Database&#xa;medipay.db&#xa;(patients | staff | bills&#xa;prescriptions | lab_orders&#xa;nurse_tasks)" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="15">
+      <mxGeometry x="600" y="30" width="220" height="110" as="geometry" />
+    </mxCell>
+
+    <!-- INTERFACES / CONNECTIONS between layers -->
+    <!-- Presentation to Business Logic -->
+    <mxCell id="200" value="uses" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;" edge="1" source="5" target="10" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="201" value="uses" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;" edge="1" source="6" target="11" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="202" value="uses" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;" edge="1" source="5" target="12" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="203" value="uses" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;" edge="1" source="5" target="13" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="204" value="uses" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;" edge="1" source="5" target="14" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- Business Logic to Data Layer -->
+    <mxCell id="205" value="queries" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;" edge="1" source="10" target="16" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="206" value="queries" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;" edge="1" source="11" target="16" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="207" value="reads/writes" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;" edge="1" source="16" target="17" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- Presentation to Data Layer (direct) -->
+    <mxCell id="208" value="reads/writes" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;" edge="1" source="3" target="16" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="209" value="reads/writes" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;" edge="1" source="7" target="16" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="210" value="reads/writes" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;" edge="1" source="8" target="16" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+  </root>
+</mxGraphModel>

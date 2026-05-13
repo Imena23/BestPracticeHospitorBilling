@@ -25,18 +25,23 @@ public class PaymentsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_payments, container, false);
         refreshUI(view, inflater);
 
-        view.findViewById(R.id.pay_mobile_money).setOnClickListener(v ->
-                showMtnMomoDialog(view, inflater));
-
-        view.findViewById(R.id.pay_card).setOnClickListener(v ->
-                showCardPaymentDialog(view, inflater));
-
+        view.findViewById(R.id.pay_mobile_money).setOnClickListener(v -> showMtnMomoDialog(view, inflater));
+        view.findViewById(R.id.pay_card).setOnClickListener(v -> showCardPaymentDialog(view, inflater));
         view.findViewById(R.id.pay_cash).setOnClickListener(v ->
-                Toast.makeText(getContext(),
-                        "Please proceed to the cashier with your QR code",
-                        Toast.LENGTH_LONG).show());
+                Toast.makeText(getContext(), "Please proceed to the cashier with your QR code", Toast.LENGTH_LONG).show());
 
+        rootView = view;
+        rootInflater = inflater;
         return view;
+    }
+
+    private View rootView;
+    private LayoutInflater rootInflater;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (rootView != null) refreshUI(rootView, rootInflater);
     }
 
     private void refreshUI(View view, LayoutInflater inflater) {
@@ -49,7 +54,7 @@ public class PaymentsFragment extends Fragment {
         // Outstanding balance — show in RWF
         TextView tvBalance = view.findViewById(R.id.tv_outstanding_balance);
         if (tvBalance != null) tvBalance.setText(
-                String.format(Locale.getDefault(), "RWF %,.0f", s.unpaidAmount * 1300));
+                String.format(Locale.getDefault(), "RWF %,.0f", s.unpaidAmount));
 
         // Status badge (now a Chip)
         Chip chipStatus = view.findViewById(R.id.badge_payment_status);
@@ -72,8 +77,7 @@ public class PaymentsFragment extends Fragment {
             Toast.makeText(getContext(), "No outstanding balance to pay", Toast.LENGTH_SHORT).show();
             return;
         }
-        // Convert USD → RWF (1 USD ≈ 1,300 RWF for demo)
-        double amountRwf = s.unpaidAmount * 1300;
+        double amountRwf = s.unpaidAmount;
         new MtnMomoDialog(requireContext(), amountRwf, s.billId, () -> {
             // Mark bills paid in DB after successful MoMo payment
             processPayment("MTN Mobile Money", view, inflater);
@@ -86,25 +90,10 @@ public class PaymentsFragment extends Fragment {
             Toast.makeText(getContext(), "No outstanding balance to pay", Toast.LENGTH_SHORT).show();
             return;
         }
-        double amountRwf = s.unpaidAmount * 1300;
+        double amountRwf = s.unpaidAmount;
         new CardPaymentDialog(requireContext(), amountRwf, s.billId, () -> {
             processPayment("Visa/Mastercard", view, inflater);
         }).show();
-    }
-
-    private void confirmPayment(String method, View view, LayoutInflater inflater) {
-        PatientSession s = PatientSession.getInstance();
-        if (s.unpaidAmount <= 0) {
-            Toast.makeText(getContext(), "No outstanding balance to pay", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        new AlertDialog.Builder(requireContext())
-                .setTitle("Confirm Payment")
-                .setMessage(String.format(Locale.getDefault(),
-                        "Pay $%.2f via %s?", s.unpaidAmount, method))
-                .setPositiveButton("Pay Now", (dialog, which) -> processPayment(method, view, inflater))
-                .setNegativeButton("Cancel", null)
-                .show();
     }
 
     private void processPayment(String method, View view, LayoutInflater inflater) {
@@ -151,7 +140,7 @@ public class PaymentsFragment extends Fragment {
                 if (tvTitle != null) tvTitle.setText(item);
                 if (tvDate != null) tvDate.setText(date);
                 if (tvAmount != null) {
-                    tvAmount.setText(String.format(Locale.getDefault(), "RWF %,.0f", amount * 1300));
+                    tvAmount.setText(String.format(Locale.getDefault(), "RWF %,.0f", amount));
                     tvAmount.setTextColor(getResources().getColor(R.color.accent_green, null));
                 }
                 historyContainer.addView(row);

@@ -39,20 +39,8 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.fragment)
     
-    // Retrofit for FHIR API calls
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
-    
-    // Gson for JSON parsing
-    implementation("com.google.code.gson:gson:2.10.1")
-    
-    // Coroutines for async operations
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-    
-    // Lifecycle components
-    implementation("androidx.lifecycle:lifecycle-viewmodel:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-livedata:2.6.2")
+    // QR Code Generation
+    implementation(libs.zxing.android.embedded)
     
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

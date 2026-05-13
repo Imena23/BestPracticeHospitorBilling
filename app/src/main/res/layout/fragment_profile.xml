@@ -21,7 +21,6 @@
             android:paddingTop="30dp"
             android:paddingBottom="30dp">
 
-            <!-- MDC circular avatar card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="80dp"
                 android:layout_height="80dp"
@@ -62,7 +61,6 @@
 
         </LinearLayout>
 
-        <!-- Patient Information label -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,7 +72,6 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <!-- Patient info MDC card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -89,47 +86,27 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp">
-
                 <include layout="@layout/item_profile_row" android:id="@+id/row_ward" />
-
-                <com.google.android.material.divider.MaterialDivider
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="10dp" />
-
+                <com.google.android.material.divider.MaterialDivider android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginVertical="10dp" />
                 <include layout="@layout/item_profile_row" android:id="@+id/row_doctor" />
-
-                <com.google.android.material.divider.MaterialDivider
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="10dp" />
-
+                <com.google.android.material.divider.MaterialDivider android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginVertical="10dp" />
                 <include layout="@layout/item_profile_row" android:id="@+id/row_admission" />
-
-                <com.google.android.material.divider.MaterialDivider
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="10dp" />
-
+                <com.google.android.material.divider.MaterialDivider android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginVertical="10dp" />
                 <include layout="@layout/item_profile_row" android:id="@+id/row_blood" />
-
             </LinearLayout>
-
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Digital Receipt label -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="12dp"
-            android:text="@string/digital_receipt"
+            android:text="Digital Receipts"
             android:textColor="@color/md_on_surface"
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <!-- Digital receipt MDC card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -139,18 +116,26 @@
             app:cardElevation="2dp"
             app:cardBackgroundColor="@color/md_surface">
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/receipt_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="24dp"
-                android:text="No receipts available yet.\nReceipts will appear here after payment."
-                android:textColor="@color/md_outline"
-                android:textSize="14sp" />
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/tv_no_receipts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="24dp"
+                    android:text="No receipts available yet.\nReceipts will appear here after payment."
+                    android:textColor="@color/md_outline"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- MDC Outlined Button — Logout (error toned) -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_logout"
             android:layout_width="match_parent"
@@ -158,12 +143,11 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
-            android:text="@string/logout"
+            android:text="Logout"
             style="@style/App.Button.Outlined"
             app:strokeColor="@color/md_error"
             android:textColor="@color/md_error" />
 
-        <!-- MDC Tonal Button — Reset Demo -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_reset_bills"
             android:layout_width="match_parent"

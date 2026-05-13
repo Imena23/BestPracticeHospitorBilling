@@ -1,0 +1,19 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Polyfam Hospital Billing System — Docker Compose
+# Orchestrates the build container and mounts output directory
+# so the compiled APK is accessible on the host machine after build.
+# ─────────────────────────────────────────────────────────────────────────────
+
+version: "3.8"
+
+services:
+  billing-app-builder:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: polyfam_billing_builder
+    volumes:
+      # Mount the output folder so the APK is accessible on the host
+      - ./app/build/outputs:/app/app/build/outputs
+    environment:
+      - GRADLE_OPTS=-Dorg.gradle.daemon=false

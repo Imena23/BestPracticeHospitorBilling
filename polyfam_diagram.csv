@@ -1,0 +1,54 @@
+##,shape,id,label,style,source,target
+node,rounded=1,1,LOGIN PAGE,,, 
+node,rounded=1,2,Patient Login\n(Name + DOB + PIN),fillColor=#dae8fc;strokeColor=#6c8ebf,,
+node,rounded=1,3,Staff Login\n(Username + Password),fillColor=#dae8fc;strokeColor=#6c8ebf,,
+node,rounded=1,4,Authentication\n& Role Router,fillColor=#fff2cc;strokeColor=#d6b656,,
+node,rounded=1,5,PATIENT PORTAL,fillColor=#d5e8d4;strokeColor=#82b366,,
+node,rounded=1,6,Home Dashboard\n(Balance + Activity),fillColor=#d5e8d4;strokeColor=#82b366,,
+node,rounded=1,7,Bills\n(Itemised Charges),fillColor=#d5e8d4;strokeColor=#82b366,,
+node,rounded=1,8,Prescriptions\n(Doctor Orders),fillColor=#d5e8d4;strokeColor=#82b366,,
+node,rounded=1,9,Payments\n(Mobile Money / Card / Cash),fillColor=#d5e8d4;strokeColor=#82b366,,
+node,rounded=1,10,Profile\n(Patient Info + Receipts),fillColor=#d5e8d4;strokeColor=#82b366,,
+node,rounded=1,11,ADMIN PANEL\n(Manage Staff Accounts),fillColor=#f8cecc;strokeColor=#b85450,,
+node,rounded=1,12,DOCTOR DASHBOARD\n(Select Patient),fillColor=#ffe6cc;strokeColor=#d79b00,,
+node,rounded=1,13,Write Prescription,fillColor=#ffe6cc;strokeColor=#d79b00,,
+node,rounded=1,14,Order Lab Test,fillColor=#ffe6cc;strokeColor=#d79b00,,
+node,rounded=1,15,Assign Nurse Task,fillColor=#ffe6cc;strokeColor=#d79b00,,
+node,rounded=1,16,PHARMACIST DASHBOARD\n(View Prescriptions),fillColor=#e1d5e7;strokeColor=#9673a6,,
+node,rounded=1,17,Dispense Medication\n+ Enter Charge,fillColor=#e1d5e7;strokeColor=#9673a6,,
+node,rounded=1,18,LAB DASHBOARD\n(View Lab Orders),fillColor=#e1d5e7;strokeColor=#9673a6,,
+node,rounded=1,19,Record Result\n+ Enter Charge,fillColor=#e1d5e7;strokeColor=#9673a6,,
+node,rounded=1,20,NURSE DASHBOARD\n(View Assigned Tasks),fillColor=#e1d5e7;strokeColor=#9673a6,,
+node,rounded=1,21,Complete Task\n+ Enter Charge,fillColor=#e1d5e7;strokeColor=#9673a6,,
+node,rounded=1,22,BILLING DATABASE\n(patients / bills / prescriptions\nlab_orders / nurse_tasks / staff),fillColor=#fff2cc;strokeColor=#d6b656,,
+node,rounded=1,23,Bill Auto-Updated\nin Real Time,fillColor=#d5e8d4;strokeColor=#82b366,,
+edge,,e1,,,,1,2
+edge,,e2,,,,1,3
+edge,,e3,,,,2,4
+edge,,e4,,,,3,4
+edge,,e5,,,,4,5
+edge,,e6,,,,4,11
+edge,,e7,,,,4,12
+edge,,e8,,,,4,16
+edge,,e9,,,,4,18
+edge,,e10,,,,4,20
+edge,,e11,,,,5,6
+edge,,e12,,,,5,7
+edge,,e13,,,,5,8
+edge,,e14,,,,5,9
+edge,,e15,,,,5,10
+edge,,e16,,,,12,13
+edge,,e17,,,,12,14
+edge,,e18,,,,12,15
+edge,,e19,,,,13,22
+edge,,e20,,,,14,22
+edge,,e21,,,,15,22
+edge,,e22,,,,16,17
+edge,,e23,,,,17,22
+edge,,e24,,,,18,19
+edge,,e25,,,,19,22
+edge,,e26,,,,20,21
+edge,,e27,,,,21,22
+edge,,e28,,,,22,23
+edge,,e29,,,,23,7
+edge,,e30,,,,23,6

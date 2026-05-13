@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView android:id="@+id/tv_info" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:textSize="14sp"
+        android:textColor="@color/md_on_surface" android:layout_marginBottom="12dp"
+        android:background="@color/md_surface_variant" android:padding="10dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:hint="Result / Findings" style="@style/App.TextInputLayout">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_result" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:inputType="textMultiLine"
+            android:minLines="2"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="12dp" android:hint="Charge Amount (RWF)"
+        style="@style/App.TextInputLayout">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_amount" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:inputType="numberDecimal"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>
