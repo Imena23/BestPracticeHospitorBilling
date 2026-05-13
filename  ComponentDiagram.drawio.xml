@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="5YPfORJmnSXj_a0R7Ek5">
+    <mxGraphModel dx="1625" dy="918" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="99" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=28;labelPosition=center;verticalLabelPosition=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" value="Polyfam Hospital Billing System — Component Diagram" vertex="1">
+          <mxGeometry height="40" width="870" x="340" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="2" parent="1" style="swimlane;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=23;startSize=30;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" value="Presentation Layer" vertex="1">
+          <mxGeometry height="300" width="1430" x="90" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="3" parent="2" style="shape=component;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=23;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" value="&amp;lt;&amp;gt;&#xa;LoginActivity" vertex="1">
+          <mxGeometry height="60" width="150" x="20" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4" parent="2" style="shape=component;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=23;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" value="&amp;lt;&amp;gt;&#xa;RegisterActivity" vertex="1">
+          <mxGeometry height="60" width="150" x="190" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="5" parent="2" style="shape=component;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=23;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" value="&amp;lt;&amp;gt;&#xa;MainActivity&#xa;(HomeFragment&#xa;BillsFragment&#xa;PrescriptionsFragment&#xa;PaymentsFragment&#xa;ProfileFragment)" vertex="1">
+          <mxGeometry height="210" width="290" x="360" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="6" parent="2" style="shape=component;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=23;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" value="&amp;lt;&amp;gt;&#xa;AdminActivity" vertex="1">
+          <mxGeometry height="90" width="190" x="680" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="7" parent="2" style="shape=component;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=23;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" value="&amp;lt;&amp;gt;&#xa;DoctorActivity" vertex="1">
+          <mxGeometry height="80" width="190" x="890" y="75" as="geometry" />
+        </mxCell>
+        <mxCell id="8" parent="2" style="shape=component;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=23;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" value="&amp;lt;&amp;gt;&#xa;PharmacistActivity&#xa;LabActivity&#xa;NurseActivity" vertex="1">
+          <mxGeometry height="110" width="250" x="1140" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="9" parent="1" style="swimlane;fontStyle=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=23;startSize=30;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" value="Business Logic Layer" vertex="1">
+          <mxGeometry height="210" width="1195" x="245" y="940" as="geometry" />
+        </mxCell>
+        <mxCell id="10" parent="9" style="shape=component;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=23;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" value="&amp;lt;&amp;gt;&#xa;PatientSession&#xa;(Singleton)" vertex="1">
+          <mxGeometry height="150" width="210" x="35" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="11" parent="9" style="shape=component;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=23;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" value="&amp;lt;&amp;gt;&#xa;StaffSession&#xa;(Singleton)" vertex="1">
+          <mxGeometry height="140" width="220" x="260" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="12" parent="9" style="shape=component;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=23;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" value="&amp;lt;&amp;gt;&#xa;MtnMomoDialog&#xa;(Payment Flow)" vertex="1">
+          <mxGeometry height="140" width="220" x="487.5" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="13" parent="9" style="shape=component;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=23;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" value="&amp;lt;&amp;gt;&#xa;CardPaymentDialog&#xa;(Payment Flow)" vertex="1">
+          <mxGeometry height="150" width="220" x="705" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="14" parent="9" style="shape=component;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=23;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" value="&amp;lt;&amp;gt;&#xa;QR Code Generator&#xa;(ZXing Library)" vertex="1">
+          <mxGeometry height="130" width="260" x="925" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="15" parent="1" style="swimlane;fontStyle=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=23;startSize=30;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" value="Data Layer" vertex="1">
+          <mxGeometry height="340" width="1280" x="220" y="1420" as="geometry" />
+        </mxCell>
+        <mxCell id="16" parent="15" style="shape=component;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=23;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" value="&amp;lt;&amp;gt;&#xa;DatabaseHelper&#xa;(SQLiteOpenHelper)" vertex="1">
+          <mxGeometry height="210" width="300" x="100" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="17" parent="15" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=23;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" value="&amp;lt;&amp;gt;&#xa;SQLite Database&#xa;medipay.db&#xa;(patients | staff | bills&#xa;prescriptions | lab_orders&#xa;nurse_tasks)" vertex="1">
+          <mxGeometry height="230" width="360" x="630" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="207" edge="1" parent="15" source="16" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;fontSize=23;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" target="17" value="reads/writes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="200" edge="1" parent="1" source="5" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;fontSize=23;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" target="10" value="uses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="201" edge="1" parent="1" source="6" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;fontSize=23;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" target="11" value="uses">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="810" y="900" />
+              <mxPoint x="585" y="900" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="202" edge="1" parent="1" source="5" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;fontSize=23;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" target="12" value="uses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="203" edge="1" parent="1" source="5" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;fontSize=23;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" target="13" value="uses">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="510" y="630" />
+              <mxPoint x="980" y="630" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="204" edge="1" parent="1" source="5" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;fontSize=23;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" target="14" value="uses">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="510" y="680" />
+              <mxPoint x="1180" y="680" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="205" edge="1" parent="1" source="10" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;fontSize=23;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" target="16" value="queries">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="385" y="1303" />
+              <mxPoint x="490" y="1303" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="206" edge="1" parent="1" source="11" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;fontSize=23;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" target="16" value="queries">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="615" y="1300" />
+              <mxPoint x="560" y="1300" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="208" edge="1" parent="1" source="3" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;fontSize=23;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" target="16" value="reads/writes">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="220" y="1360" />
+              <mxPoint x="440" y="1360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="209" edge="1" parent="1" source="7" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;fontSize=23;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" target="16" value="reads/writes">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="985" y="620" />
+              <mxPoint x="1520" y="620" />
+              <mxPoint x="1520" y="1340" />
+              <mxPoint x="610" y="1340" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="210" edge="1" parent="1" source="8" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;fontSize=23;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fixDash=0;backgroundOutline=0;strokeWidth=3;" target="16" value="reads/writes">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1195" y="780" />
+              <mxPoint x="80" y="780" />
+              <mxPoint x="80" y="1285" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
