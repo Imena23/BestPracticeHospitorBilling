@@ -4,8 +4,6 @@
 # so the compiled APK is accessible on the host machine after build.
 # ─────────────────────────────────────────────────────────────────────────────
 
-version: "3.8"
-
 services:
   billing-app-builder:
     build:

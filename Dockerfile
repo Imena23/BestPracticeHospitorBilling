@@ -12,8 +12,8 @@ WORKDIR /app
 # Copy the entire project into the container
 COPY . .
 
-# Ensure Gradle wrapper is executable
-RUN chmod +x ./gradlew
+# Fix Windows line endings (CRLF -> LF) and make Gradle wrapper executable
+RUN sed -i 's/\r$//' ./gradlew && chmod +x ./gradlew
 
 # Accept Android SDK licenses non-interactively
 RUN yes | sdkmanager --licenses || true
