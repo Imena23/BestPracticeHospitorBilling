@@ -1,0 +1,90 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="RXZD-UOrZ51YznpgDZsJ">
+    <mxGraphModel dx="1933" dy="668" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="uZK-lH8p8ZowRvdXNfLb-14" edge="1" parent="1" source="uZK-lH8p8ZowRvdXNfLb-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0.1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=light-dark(#3700CC,#33FFFF);" target="uZK-lH8p8ZowRvdXNfLb-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uZK-lH8p8ZowRvdXNfLb-16" edge="1" parent="1" source="uZK-lH8p8ZowRvdXNfLb-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=light-dark(#3700CC,#33FFFF);" target="uZK-lH8p8ZowRvdXNfLb-7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-320" y="670" />
+              <mxPoint x="-320" y="765" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uZK-lH8p8ZowRvdXNfLb-17" edge="1" parent="1" source="uZK-lH8p8ZowRvdXNfLb-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=light-dark(#3700CC,#33FFFF);" target="uZK-lH8p8ZowRvdXNfLb-8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-330" y="690" />
+              <mxPoint x="-330" y="865" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uZK-lH8p8ZowRvdXNfLb-18" edge="1" parent="1" source="uZK-lH8p8ZowRvdXNfLb-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=light-dark(#3700CC,#33FFFF);" target="uZK-lH8p8ZowRvdXNfLb-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-340" y="690" />
+              <mxPoint x="-340" y="955" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uZK-lH8p8ZowRvdXNfLb-19" edge="1" parent="1" source="uZK-lH8p8ZowRvdXNfLb-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#6a00ff;strokeColor=light-dark(#3700CC,#33FFFF);" target="uZK-lH8p8ZowRvdXNfLb-10">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-350" y="750" />
+              <mxPoint x="-350" y="1055" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <UserObject label="%name%" name="Patient" undefined="" placeholders="1" id="uZK-lH8p8ZowRvdXNfLb-2">
+          <mxCell parent="1" style="shape=umlActor;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1">
+            <mxGeometry height="120" width="75" x="-510" y="630" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="%name%" name="Hospital system" undefined="" placeholders="1" id="uZK-lH8p8ZowRvdXNfLb-3">
+          <mxCell parent="1" style="shape=umlActor;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1">
+            <mxGeometry height="130" width="70" x="-510" y="790" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="%name%" name="Payment gateway" undefined="" placeholders="1" id="uZK-lH8p8ZowRvdXNfLb-4">
+          <mxCell parent="1" style="shape=umlActor;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1">
+            <mxGeometry height="120" width="70" x="-510" y="960" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="%name%" name="Digital hospital billing app" undefined="" placeholders="1" id="uZK-lH8p8ZowRvdXNfLb-5">
+          <mxCell parent="1" style="shape=swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1">
+            <mxGeometry height="530" width="310" x="-360" y="580" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="%name%" name="Register / login" placeholders="1" id="uZK-lH8p8ZowRvdXNfLb-6">
+          <mxCell parent="uZK-lH8p8ZowRvdXNfLb-5" style="shape=ellipse;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1">
+            <mxGeometry height="70" width="140" x="85" y="50" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="%name%" name="Receive digital receipt" placeholders="1" id="uZK-lH8p8ZowRvdXNfLb-7">
+          <mxCell parent="uZK-lH8p8ZowRvdXNfLb-5" style="shape=ellipse;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1">
+            <mxGeometry height="70" width="180" x="70" y="150" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="%name%" name="View real-time bill" undefined="2" placeholders="1" id="uZK-lH8p8ZowRvdXNfLb-8">
+          <mxCell parent="uZK-lH8p8ZowRvdXNfLb-5" style="shape=ellipse;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1">
+            <mxGeometry height="70" width="160" x="80" y="250" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="%name%" name="Access prescription" undefined="2" placeholders="1" id="uZK-lH8p8ZowRvdXNfLb-9">
+          <mxCell parent="uZK-lH8p8ZowRvdXNfLb-5" style="shape=ellipse;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1">
+            <mxGeometry height="70" width="170" x="75" y="340" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="%name%" name="Make payment" undefined="3" placeholders="1" id="uZK-lH8p8ZowRvdXNfLb-10">
+          <mxCell parent="uZK-lH8p8ZowRvdXNfLb-5" style="shape=ellipse;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1">
+            <mxGeometry height="70" width="140" x="85" y="440" as="geometry" />
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
