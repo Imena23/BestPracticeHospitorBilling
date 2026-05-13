@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Auto-login for patients
-        SharedPreferences prefs = getSharedPreferences("MediPayPrefs", MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("MusanzeHospitalPrefs", MODE_PRIVATE);
         if (prefs.getBoolean("isLoggedIn", false)) {
             long patientId = prefs.getLong("patientId", -1);
             if (patientId != -1) { loadSessionAndNavigate(patientId); return; }
@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
 
             refreshPatientBillTotals(session);
 
-            getSharedPreferences("MediPayPrefs", MODE_PRIVATE).edit()
+            getSharedPreferences("MusanzeHospitalPrefs", MODE_PRIVATE).edit()
                     .putBoolean("isLoggedIn", true).putLong("patientId", session.id).apply();
 
             startActivity(new Intent(this, MainActivity.class));

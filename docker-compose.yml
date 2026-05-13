@@ -1,5 +1,5 @@
 # ─────────────────────────────────────────────────────────────────────────────
-# Polyfam Hospital Billing System — Docker Compose
+# Musanze Hospital Billing System — Docker Compose
 # Orchestrates the build container and mounts output directory
 # so the compiled APK is accessible on the host machine after build.
 # ─────────────────────────────────────────────────────────────────────────────
@@ -9,7 +9,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: polyfam_billing_builder
+    container_name: musanze_billing_builder
     volumes:
       # Mount the output folder so the APK is accessible on the host
       - ./app/build/outputs:/app/app/build/outputs

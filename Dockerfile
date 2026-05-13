@@ -1,5 +1,5 @@
 # ─────────────────────────────────────────────────────────────────────────────
-# Polyfam Hospital Billing System — Dockerfile
+# Musanze Hospital Billing System — Dockerfile
 # Purpose: Builds the Android APK inside a consistent, isolated environment.
 # Base image provides Java 17 + Android SDK + Gradle pre-installed.
 # ─────────────────────────────────────────────────────────────────────────────

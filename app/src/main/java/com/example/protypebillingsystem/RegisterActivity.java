@@ -61,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
         long newId = dbHelper.registerPatient(name, dob, patientId, pin);
         if (newId == -1) { showError("This name and date of birth already exist."); return; }
 
-        getSharedPreferences("MediPayPrefs", MODE_PRIVATE).edit()
+        getSharedPreferences("MusanzeHospitalPrefs", MODE_PRIVATE).edit()
                 .putBoolean("isLoggedIn", true).putLong("patientId", newId).apply();
         loadSessionAndNavigate(newId);
     }

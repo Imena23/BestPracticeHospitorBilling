@@ -44,7 +44,7 @@ public class ProfileFragment extends Fragment {
         view.findViewById(R.id.btn_logout).setOnClickListener(v -> {
             // Clear session
             android.content.SharedPreferences prefs = requireContext()
-                    .getSharedPreferences("MediPayPrefs", android.content.Context.MODE_PRIVATE);
+                    .getSharedPreferences("MusanzeHospitalPrefs", android.content.Context.MODE_PRIVATE);
             prefs.edit()
                     .putBoolean("isLoggedIn", false)
                     .remove("patientId")
