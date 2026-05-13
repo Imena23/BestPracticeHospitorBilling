@@ -1,8 +1,8 @@
 # SOFTWARE TEST PLAN
 ## Musanze Hospital — Mobile Patient Billing Portal
-**Version:** 2.0  
-**Date:** May 2026  
-**Prepared by:** Group AA  
+**Version:** 2.0.0
+**Date:** May 2026
+**Prepared by:** Group AA
 **Repository:** https://github.com/Imena23/BestPracticeHospitorBilling
 
 ---
@@ -10,17 +10,18 @@
 ## 1. INTRODUCTION
 
 ### 1.1 Purpose
-This Software Test Plan defines the testing strategy, scope, objectives, resources, 
-schedule, and approach for testing the Musanze Hospital Mobile Patient Billing Portal. 
-It serves as a roadmap for all testing activities to ensure the application meets its 
-functional and non-functional requirements before deployment.
+This Software Test Plan defines the testing strategy, scope, objectives, resources,
+schedule, and approach for testing the Musanze Hospital Mobile Patient Billing Portal.
+It ensures the application meets functional and non-functional requirements before
+deployment, particularly in digitizing a hospital that currently operates entirely on
+manual, paper-based billing processes.
 
 ### 1.2 Project Overview
-The Musanze Hospital Billing System is an Android mobile application that connects 
-hospital staff workflows directly to a patient-facing billing portal. It supports six 
-user roles: Patient, Doctor, Pharmacist, Lab Technician, Nurse, and Admin. Every 
-service rendered by staff automatically generates a charge on the patient's bill in 
-real time.
+The Musanze Hospital Billing System is an Android mobile application that digitizes
+staff workflows and connects them directly to a patient-facing billing portal. It
+supports six user roles: Patient, Doctor, Pharmacist, Lab Technician, Nurse, and Admin.
+Every service rendered by staff automatically generates a charge on the patient's bill
+in real time, replacing manual paper-based charge compilation at the billing office.
 
 ### 1.3 Scope of Testing
 The following modules are in scope for testing:
@@ -38,9 +39,9 @@ The following modules are in scope for testing:
 | Payment Processing | MTN Mobile Money flow, Visa/Mastercard flow, QR code generation |
 | Database | SQLite CRUD operations, data integrity, schema version management |
 
-The following are **out of scope**:
+**Out of scope:**
 - Real payment gateway integration (payments are simulated)
-- Network/API testing (FHIR integration has been removed)
+- Network/API testing (no external hospital system integration in this version)
 - Performance/load testing under concurrent users
 
 ---
@@ -69,7 +70,7 @@ The following are **out of scope**:
 | Unit Testing | Test individual methods in isolation | JUnit 4 (Android) |
 | Integration Testing | Test interaction between modules (e.g. staff action → bill update) | Manual + Android Instrumented Tests |
 | System Testing | Test complete end-to-end user journeys | Manual on emulator/device |
-| User Acceptance Testing (UAT) | Validate the system meets real-world hospital billing needs | Manual walkthrough |
+| User Acceptance Testing (UAT) | Validate the system meets Musanze Hospital's real-world billing needs | Manual walkthrough |
 | Regression Testing | Re-run tests after any code change to ensure nothing is broken | Manual |
 
 ### 3.2 Testing Levels
@@ -117,9 +118,9 @@ The following are **out of scope**:
 | **Test Case ID** | TC-001 |
 | **Module** | Authentication |
 | **Test Type** | System Test |
-| **Precondition** | App is installed. Demo patient exists (Kevine Imena, DOB: 15/03/1990, PIN: 1234) |
+| **Precondition** | App installed. Demo patient exists (Kevine Imena, DOB: 15/03/1990, PIN: 1234) |
 | **Test Steps** | 1. Open app — Login page appears. 2. Ensure Patient tab is selected. 3. Enter Name: "Kevine Imena". 4. Select DOB: 15/03/1990. 5. Enter PIN: 1234. 6. Tap Login. |
-| **Expected Result** | Patient is authenticated and navigated to Home dashboard showing name, outstanding balance, and recent activity |
+| **Expected Result** | Patient authenticated and navigated to Home dashboard showing name, outstanding balance in RWF, and recent activity. Bill is displayed digitally instead of requiring a visit to the cashier. |
 | **Actual Result** | |
 | **Status** | Pass / Fail |
 
@@ -133,7 +134,7 @@ The following are **out of scope**:
 | **Test Type** | System Test |
 | **Precondition** | App is on Login page |
 | **Test Steps** | 1. Enter Name: "Kevine Imena". 2. Select DOB: 15/03/1990. 3. Enter PIN: 9999. 4. Tap Login. |
-| **Expected Result** | Error message displayed: "Incorrect name, date of birth, or PIN." User remains on login screen |
+| **Expected Result** | Error message: "Incorrect name, date of birth, or PIN." User remains on login screen |
 | **Actual Result** | |
 | **Status** | Pass / Fail |
 
@@ -172,7 +173,7 @@ The following are **out of scope**:
 |-------|---------|
 | **Test Case ID** | TC-005 |
 | **Module** | Authentication |
-| **Test Type** | System Test |
+| **Test Type** | Validation Test |
 | **Precondition** | App is on Login page, Staff tab selected |
 | **Test Steps** | 1. Enter Username: dr.sarah. 2. Enter Password: wrongpass. 3. Tap Login. |
 | **Expected Result** | Error message: "Invalid username or password" |
@@ -189,7 +190,7 @@ The following are **out of scope**:
 | **Test Type** | System Test |
 | **Precondition** | App is on Login page |
 | **Test Steps** | 1. Tap "New patient? Register". 2. Enter Name: "Test Patient". 3. Select DOB. 4. Enter PIN: 4321. 5. Confirm PIN: 4321. 6. Tap Register. |
-| **Expected Result** | Patient account created, navigated to Home dashboard with empty bill |
+| **Expected Result** | Patient account created and stored in local database. Navigated to Home dashboard with empty bill. No paper form required. |
 | **Actual Result** | |
 | **Status** | Pass / Fail |
 
@@ -233,7 +234,7 @@ The following are **out of scope**:
 | **Test Type** | System Test |
 | **Precondition** | Logged in as Kevine Imena (PIN: 1234) |
 | **Test Steps** | 1. Tap Bills tab. |
-| **Expected Result** | Bills tab shows itemised list with: Consultation Fee RWF 195,000, Laboratory Tests RWF 390,000, Medication RWF 260,000, Ward Charges RWF 1,950,000, X-Ray RWF 390,000. Each item shows Paid/Unpaid badge. Grand total displayed correctly |
+| **Expected Result** | Bills tab shows itemised list: Consultation Fee RWF 195,000 — Unpaid, Laboratory Tests RWF 390,000 — Unpaid, Medication RWF 260,000 — Unpaid, Ward Charges RWF 1,950,000 — Unpaid, X-Ray RWF 390,000 — Unpaid. Grand total displayed. Patient sees this digitally without visiting the cashier. |
 | **Actual Result** | |
 | **Status** | Pass / Fail |
 
@@ -259,9 +260,9 @@ The following are **out of scope**:
 | **Test Case ID** | TC-011 |
 | **Module** | Patient Portal — Prescriptions |
 | **Test Type** | Integration Test |
-| **Precondition** | Doctor has written a prescription for this patient |
+| **Precondition** | Doctor has written a prescription for this patient (TC-015 completed) |
 | **Test Steps** | 1. Log in as patient. 2. Tap Prescriptions tab. |
-| **Expected Result** | Prescription list shows medicine name, dosage, notes, date, and status (Pending/Dispensed) |
+| **Expected Result** | Prescription list shows medicine name, dosage, notes, date, and status (Pending/Dispensed). Patient sees prescription digitally without needing a paper copy. |
 | **Actual Result** | |
 | **Status** | Pass / Fail |
 
@@ -275,7 +276,7 @@ The following are **out of scope**:
 | **Test Type** | System Test |
 | **Precondition** | Logged in as patient with unpaid balance |
 | **Test Steps** | 1. Go to Payments tab. 2. Tap "Mobile Money". 3. Enter phone number: 0781234567. 4. Tap "Send Payment Prompt". 5. Tap "Reply" on USSD screen. 6. Enter PIN: 12345. 7. Tap "Reply". |
-| **Expected Result** | Payment success screen shown. Outstanding balance becomes RWF 0. Bills tab shows all items as Paid |
+| **Expected Result** | Payment success screen shown. Outstanding balance becomes RWF 0. Bills tab shows all items as Paid. Patient no longer needs to queue at cashier. |
 | **Actual Result** | |
 | **Status** | Pass / Fail |
 
@@ -303,7 +304,7 @@ The following are **out of scope**:
 | **Test Type** | System Test |
 | **Precondition** | Logged in as patient |
 | **Test Steps** | 1. Go to Profile tab. 2. Tap "Logout". |
-| **Expected Result** | Session cleared. App navigates back to Login screen. Auto-login no longer triggers on restart |
+| **Expected Result** | Session cleared. App navigates back to Login screen. Auto-login no longer triggers on restart. |
 | **Actual Result** | |
 | **Status** | Pass / Fail |
 
@@ -319,7 +320,7 @@ The following are **out of scope**:
 | **Test Type** | Integration Test |
 | **Precondition** | Logged in as dr.sarah |
 | **Test Steps** | 1. Tap "Select Patient" → choose Kevine Imena. 2. Ensure Prescriptions tab is active. 3. Tap "+ Add Order". 4. Enter Medicine: Amoxicillin. 5. Enter Dosage: 500mg twice daily. 6. Enter Notes: Take after meals. 7. Tap "Prescribe". |
-| **Expected Result** | Prescription saved. Appears in doctor's list with status "pending". Pharmacist dashboard shows it as pending |
+| **Expected Result** | Prescription saved to database. Appears in doctor's list with status "pending". Pharmacist dashboard shows it immediately. No paper prescription needed. |
 | **Actual Result** | |
 | **Status** | Pass / Fail |
 
@@ -333,7 +334,7 @@ The following are **out of scope**:
 | **Test Type** | Integration Test |
 | **Precondition** | Logged in as dr.sarah, patient selected |
 | **Test Steps** | 1. Tap Lab Orders tab. 2. Tap "+ Add Order". 3. Enter Test: Full Blood Count. 4. Enter Notes: Check for anaemia. 5. Tap "Order". |
-| **Expected Result** | Lab order saved. Appears in lab technician dashboard as pending |
+| **Expected Result** | Lab order saved. Appears in lab technician dashboard as pending. No paper request form needed. |
 | **Actual Result** | |
 | **Status** | Pass / Fail |
 
@@ -347,7 +348,7 @@ The following are **out of scope**:
 | **Test Type** | Integration Test |
 | **Precondition** | Logged in as dr.sarah, patient selected |
 | **Test Steps** | 1. Tap Nurse Tasks tab. 2. Tap "+ Add Order". 3. Enter Service: IV Drip Administration. 4. Enter Notes: 500ml saline. 5. Tap "Assign". |
-| **Expected Result** | Task saved. Appears in nurse dashboard as pending |
+| **Expected Result** | Task saved. Appears in nurse dashboard as pending. No paper ward instruction needed. |
 | **Actual Result** | |
 | **Status** | Pass / Fail |
 
@@ -361,9 +362,9 @@ The following are **out of scope**:
 | **Test Case ID** | TC-018 |
 | **Module** | Pharmacist Dashboard |
 | **Test Type** | Integration Test |
-| **Precondition** | Logged in as pharm.paul. Doctor has written prescription for Kevine Imena (TC-015 completed) |
+| **Precondition** | Logged in as pharm.paul. TC-015 completed. |
 | **Test Steps** | 1. View pending prescriptions list. 2. Find Amoxicillin for Kevine Imena. 3. Tap "Dispense". 4. Enter charge: 15000. 5. Tap "Dispense & Charge". |
-| **Expected Result** | Prescription status changes to "Dispensed". New bill entry "Medication: Amoxicillin — RWF 15,000" appears on Kevine Imena's Bills tab |
+| **Expected Result** | Prescription status changes to "Dispensed". New bill entry "Medication: Amoxicillin — RWF 15,000" appears automatically on Kevine Imena's Bills tab. No manual billing office submission needed. |
 | **Actual Result** | |
 | **Status** | Pass / Fail |
 
@@ -377,9 +378,9 @@ The following are **out of scope**:
 | **Test Case ID** | TC-019 |
 | **Module** | Lab Dashboard |
 | **Test Type** | Integration Test |
-| **Precondition** | Logged in as lab.alice. Doctor has ordered Full Blood Count for Kevine Imena (TC-016 completed) |
+| **Precondition** | Logged in as lab.alice. TC-016 completed. |
 | **Test Steps** | 1. View pending lab orders. 2. Find Full Blood Count for Kevine Imena. 3. Tap "Record Result". 4. Enter Result: Haemoglobin 12.5 g/dL — Normal range. 5. Enter charge: 25000. 6. Tap "Complete & Charge". |
-| **Expected Result** | Lab order status changes to "Completed". New bill entry "Lab Test: Full Blood Count — RWF 25,000" appears on patient's Bills tab |
+| **Expected Result** | Lab order status changes to "Completed". New bill entry "Lab Test: Full Blood Count — RWF 25,000" appears on patient's Bills tab. No paper result sheet or manual billing needed. |
 | **Actual Result** | |
 | **Status** | Pass / Fail |
 
@@ -393,9 +394,9 @@ The following are **out of scope**:
 | **Test Case ID** | TC-020 |
 | **Module** | Nurse Dashboard |
 | **Test Type** | Integration Test |
-| **Precondition** | Logged in as nurse.grace. Doctor has assigned IV Drip task for Kevine Imena (TC-017 completed) |
+| **Precondition** | Logged in as nurse.grace. TC-017 completed. |
 | **Test Steps** | 1. View pending tasks. 2. Find IV Drip Administration for Kevine Imena. 3. Tap "Mark Done". 4. Enter charge: 10000. 5. Tap "Done & Charge". |
-| **Expected Result** | Task status changes to "Done". New bill entry "Nursing: IV Drip Administration — RWF 10,000" appears on patient's Bills tab |
+| **Expected Result** | Task status changes to "Done". New bill entry "Nursing: IV Drip Administration — RWF 10,000" appears on patient's Bills tab. No ward register entry needed. |
 | **Actual Result** | |
 | **Status** | Pass / Fail |
 
@@ -411,7 +412,7 @@ The following are **out of scope**:
 | **Test Type** | System Test |
 | **Precondition** | Logged in as admin |
 | **Test Steps** | 1. Tap "+ Add Staff". 2. Enter Name: Dr. Jean Pierre. 3. Select Role: doctor. 4. Enter Username: dr.jean. 5. Enter Password: jean123. 6. Tap "Create". |
-| **Expected Result** | New staff account appears in the staff list with role "DOCTOR" |
+| **Expected Result** | New staff account appears in the staff list with role "DOCTOR". Account can be used to log in immediately. |
 | **Actual Result** | |
 | **Status** | Pass / Fail |
 
@@ -423,9 +424,9 @@ The following are **out of scope**:
 | **Test Case ID** | TC-022 |
 | **Module** | Admin Panel |
 | **Test Type** | System Test |
-| **Precondition** | Logged in as admin. Staff account dr.jean exists (TC-021 completed) |
+| **Precondition** | Logged in as admin. TC-021 completed. |
 | **Test Steps** | 1. Find dr.jean in staff list. 2. Tap "Delete". 3. Confirm deletion. |
-| **Expected Result** | Staff account removed from list. Login attempt with dr.jean/jean123 fails |
+| **Expected Result** | Staff account removed from list. Login attempt with dr.jean/jean123 returns "Invalid username or password". |
 | **Actual Result** | |
 | **Status** | Pass / Fail |
 
@@ -453,9 +454,9 @@ The following are **out of scope**:
 | **Test Case ID** | TC-024 |
 | **Module** | Billing Integration |
 | **Test Type** | End-to-End Integration Test |
-| **Precondition** | Patient Kevine Imena is logged in on one device/session. Pharmacist is logged in on another |
-| **Test Steps** | 1. Note patient's current outstanding balance on Home tab. 2. Pharmacist dispenses medication and adds charge of RWF 20,000. 3. Patient navigates away and returns to Home tab (triggers onResume). |
-| **Expected Result** | Patient's outstanding balance increases by RWF 20,000. New bill item appears in Bills tab |
+| **Precondition** | Patient Kevine Imena is logged in. Pharmacist is logged in separately. |
+| **Test Steps** | 1. Note patient's current outstanding balance on Home tab. 2. Pharmacist dispenses medication and adds charge of RWF 20,000. 3. Patient navigates away and returns to Home tab. |
+| **Expected Result** | Patient's outstanding balance increases by RWF 20,000. New bill item appears in Bills tab automatically. This replaces the manual process where billing office compiled charges at end of day. |
 | **Actual Result** | |
 | **Status** | Pass / Fail |
 
@@ -463,24 +464,22 @@ The following are **out of scope**:
 
 ## 7. UNIT TEST CASES (Automated)
 
-These tests are located in:
+Located in:
 `app/src/test/java/com/example/protypebillingsystem/ExampleUnitTest.java`
 
 | Test ID | Method Tested | Input | Expected Output |
 |---------|--------------|-------|-----------------|
 | UT-001 | `PatientSession.getInitials()` | name = "Kevine Imena" | "KI" |
-| UT-002 | `PatientSession.getInitials()` | name = "John" | "J" |
+| UT-002 | `PatientSession.getInitials()` | name = "Keza" | "K" |
 | UT-003 | `PatientSession.isFullyPaid()` | unpaidAmount = 0 | true |
-| UT-004 | `PatientSession.isFullyPaid()` | unpaidAmount = 50000 | false |
-| UT-005 | `PatientSession.getInstance()` | called twice | same instance returned (Singleton) |
-| UT-006 | `StaffSession.getInstance()` | called twice | same instance returned (Singleton) |
-| UT-007 | `StaffSession.set()` | id=1, name="Dr. Sarah", role="doctor" | session fields updated correctly |
+| UT-004 | `PatientSession.isFullyPaid()` | unpaidAmount = 195000 | false |
+| UT-005 | `PatientSession.getInstance()` | called twice | same instance (Singleton) |
+| UT-006 | `StaffSession.getInstance()` | called twice | same instance (Singleton) |
+| UT-007 | `StaffSession.set()` | id=1, name="Dr. Sarah Mensah", role="doctor" | session fields updated correctly |
 
 ---
 
 ## 8. BUG REPORTING TEMPLATE
-
-When a test fails, record the bug using this format:
 
 | Field | Details |
 |-------|---------|
@@ -502,9 +501,9 @@ Testing is considered complete when:
 - All 24 system/integration test cases have been executed
 - All 7 unit tests pass
 - No Critical or High severity bugs remain open
-- All payment flows complete successfully
 - Real-time billing update (TC-024) passes consistently
 - Logout and session clearing work correctly on all tested devices
+- All payment flows complete successfully
 
 ---
 
