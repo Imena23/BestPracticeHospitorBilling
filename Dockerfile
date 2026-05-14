@@ -18,8 +18,10 @@ RUN sed -i 's/\r$//' ./gradlew && chmod +x ./gradlew
 # Accept Android SDK licenses non-interactively
 RUN yes | sdkmanager --licenses || true
 
-# Build the debug APK
-RUN ./gradlew assembleDebug --no-daemon
+# Build the debug APK with extended network timeout for Gradle download
+RUN ./gradlew assembleDebug --no-daemon \
+    -Dorg.gradle.internal.http.connectionTimeout=120000 \
+    -Dorg.gradle.internal.http.socketTimeout=120000
 
 # The built APK will be at:
 # /app/app/build/outputs/apk/debug/app-debug.apk
